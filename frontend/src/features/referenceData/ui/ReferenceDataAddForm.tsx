@@ -25,7 +25,7 @@ export default function ReferenceDataAddForm({ title, entity }: Props) {
       <Input
         size={size}
         radius="xl"
-        placeholder={`Add new ${title}`}
+        placeholder={`Add New ${title}`}
         className="min-w-[180px] w-[50%]"
         value={value}
         onChange={(e) => setValue(e.currentTarget.value)}

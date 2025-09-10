@@ -10,8 +10,8 @@ app = FastAPI(root_path="/api")
 app.router.redirect_slashes = False
 
 origins = [
-    "http://localhost:5172",
-    "http://127.0.0.1:5173",
+    "http://localhost",
+    "http://127.0.0.1",
 ]
 
 app.add_middleware(

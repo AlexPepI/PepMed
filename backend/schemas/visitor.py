@@ -54,7 +54,7 @@ class VisitorHomepage(BaseModel):
     latest_visit : Optional[datetime] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class VisitorResponseHomepage(BaseModel):
     visitors: List[VisitorHomepage]

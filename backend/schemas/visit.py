@@ -12,7 +12,7 @@ class VisitBase(BaseModel):
     control : str | None
     
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class VisitFileBase(BaseModel):
     id: int
@@ -21,7 +21,7 @@ class VisitFileBase(BaseModel):
     created_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class VisitResponseForVisitor(BaseModel):
     id:int

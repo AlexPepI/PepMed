@@ -7,7 +7,6 @@ function Loading() {
       <Loader size={35} />
     </div>
   )
-
 }
 
 export default Loading

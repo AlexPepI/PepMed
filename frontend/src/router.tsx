@@ -9,7 +9,6 @@ const NewVisit = lazy(()=>import("./pages/NewVisit"))
 const VisitorDetails = lazy(()=> import("./pages/VisitorDetails"))
 const VisitDetails = lazy(()=> import("./pages/VisitDetails.tsx"))
 
-
 export function AppRoutes() {
     return(
         <Suspense fallback={<Loading />}>
