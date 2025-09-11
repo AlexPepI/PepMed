@@ -38,23 +38,23 @@ export default function CatalogTable({ title, entity }: Props) {
             <Table>
               <Table.Thead>
                 <Table.Tr>
-                  <Table.Th>Name</Table.Th>
-                  <Table.Th style={{ width: 140 }}>Action</Table.Th>
+                  <Table.Th ><div className='ml-5'>Name</div></Table.Th>
+                  <Table.Th style={{ width: 140 }}><div className=' flex justify-center'>Action</div></Table.Th>
                 </Table.Tr>
               </Table.Thead>
               <Table.Tbody>
                 {(data ?? []).length === 0 ? (
                   <Table.Tr>
-                    <Table.Td colSpan={2} style={{ textAlign: 'center', padding: 24 }}>
+                    <Table.Td colSpan={2} style={{ textAlign: 'center', padding: 14 }}>
                       No data yet
                     </Table.Td>
                   </Table.Tr>
                 ) : (
                   (data as RefItem[]).map((row) => (
-                    <Table.Tr key={row.id}>
-                      <Table.Td>{row.name}</Table.Td>
-                      <Table.Td className=''>
-                        <div className='justify-end flex ml-auto'>
+                    <Table.Tr key={row.id} className=''>
+                      <Table.Td ><div className='ml-3'>{row.name}</div></Table.Td>
+                      <Table.Td >
+                        <div className='justify-center flex ml-auto'>
                           <CloseButton 
                             onClick={() => deleteMutation.mutate(Number(row.id))}
                             disabled={deleteMutation.isPending}
