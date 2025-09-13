@@ -15,6 +15,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=mydb
+    ports:
+      - "5432:5432"
 
   frontend:
     build: ./frontend

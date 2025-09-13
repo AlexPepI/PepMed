@@ -27,7 +27,7 @@ Pep Medical is an internal application developed for a group of doctors to strea
 - [Docker](https://www.docker.com/) installed on your machine  
 
 ### Run the app
-From the project root:
+From the project root folder:
 
 ```bash
 docker compose up --build
