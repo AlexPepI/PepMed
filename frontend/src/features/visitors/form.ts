@@ -9,7 +9,7 @@ export const newVisitorInitialValues: VisitorInput = {
   amka: "",
   weight: "",
   height: "",
-  smoker: "Όχι",
+  smoker: "No",
   years_smoking: "",
   cig_per_day: "",
   email: "",
@@ -24,42 +24,35 @@ export const buildNewVisitorForm = (initial: VisitorInput) =>
     mode: "controlled",
     initialValues: initial,
     validate: {
-      name: isNotEmpty("Πρέπει να συμπληρωθεί!"),
-      surname: isNotEmpty("Πρέπει να συμπληρωθεί!"),
-      birth_date: isNotEmpty("Πρέπει να συμπληρωθεί!"),
-      email: (value: string) => {
-        if (value.trim() === "") return null;
-        return isEmail("Προσθέστε αληθινό Email!")(value);
+      name: isNotEmpty("Please, fill out this field"),
+      surname: isNotEmpty("Please, fill out this field"),
+      birth_date: isNotEmpty("Please, fill out this field"),
+
+      email: (v) => (v.trim() ? isEmail("Provide an email that exists")(v) : null),
+
+      phoneNumber: (v) => {
+        if (!v.trim()) return null;
+        const len = hasLength({ min: 10, max: 10 }, "Provide a phone number that exists")(v);
+        if (len) return len;
+        if (!/^\d+$/.test(v.trim())) return "It must be a number";
       },
-      phoneNumber: (value: string) => {
-        if (value.trim() === "") return null;
-        const lengthError = hasLength(
-          { min: 10, max: 10 },
-          "Προσθέστε αληθινό κινητό τηλέφωνο!"
-        )(value);
-        if (lengthError) return lengthError;
-        if (!/^\d+$/.test(value.trim())) return "Επιτρέπονται μόνο αριθμοί";
-      },
-      amka: hasLength({ min: 11, max: 11 }, "Προσθέστε αληθινό Α.Μ.Κ.Α"),
-      weight: (value: string) => {
-        const filled = isNotEmpty("Πρέπει να συμπληρωθεί!")(value);
+
+      amka: hasLength({ min: 11, max: 11 }, "Provide a real personal number"),
+
+      weight: (v) => {
+        const filled = isNotEmpty("Please, fill out this field")(v);
         if (filled) return filled;
-        if (!/^\d+$/.test(value.trim())) return "Επιτρέπονται μόνο αριθμοί";
+        if (!/^\d+$/.test(v.trim())) return "It must be a number";
       },
-      years_smoking: (value: string) => {
-        if (value.trim() === "") return null;
-        if (!/^\d+$/.test(value.trim())) return "Επιτρέπονται μόνο αριθμοί";
-      },
-      cig_per_day: (value: string) => {
-        if (value.trim() === "") return null;
-        if (!/^\d+$/.test(value.trim())) return "Επιτρέπονται μόνο αριθμοί";
-      },
-      height: (value: string) => {
-        const filled = isNotEmpty("Πρέπει να συμπληρωθεί!")(value);
+
+      years_smoking: (v) => (v.trim() && !/^\d+$/.test(v.trim()) ? "It must be a number" : null),
+      cig_per_day: (v) => (v.trim() && !/^\d+$/.test(v.trim()) ? "It must be a number" : null),
+
+      height: (v) => {
+        const filled = isNotEmpty("Please, fill out this field")(v);
         if (filled) return filled;
-        if (!/^\d+$/.test(value.trim())) return "Επιτρέπονται μόνο αριθμοί";
+        if (!/^\d+$/.test(v.trim())) return "It must be a number";
       },
     },
   });
-
 export type VisitorForm = ReturnType<typeof buildNewVisitorForm>;

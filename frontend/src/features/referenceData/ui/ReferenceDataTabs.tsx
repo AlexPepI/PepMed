@@ -9,10 +9,10 @@ function ReferenceDataTab() {
           Symptoms
         </Tabs.Tab>
         <Tabs.Tab value="medicines">
-          Medicines
+          Medications
         </Tabs.Tab>
         <Tabs.Tab value="diseases">
-          Diseases
+          Conditions
         </Tabs.Tab>
       </Tabs.List>
 
@@ -21,11 +21,11 @@ function ReferenceDataTab() {
       </Tabs.Panel>
 
       <Tabs.Panel value="medicines">
-            <ReferenceDataTable title="Medicines" addTitle="Add medicine" entity="medicine"/>
+            <ReferenceDataTable title="Medications" addTitle="Add medication" entity="medicine"/>
       </Tabs.Panel>
 
       <Tabs.Panel value="diseases">
-          <ReferenceDataTable title="Diseases" addTitle="Add disease" entity="disease"/>
+          <ReferenceDataTable title="Conditions" addTitle="Add condition" entity="disease"/>
       </Tabs.Panel>
     </Tabs>
   );

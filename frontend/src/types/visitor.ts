@@ -1,7 +1,7 @@
 export type VisitorInput = {
   name: string;
   surname: string;
-  birth_date: string | null;
+  birth_date: Date | null;
   gender: string;
   amka: string;
   weight: string;

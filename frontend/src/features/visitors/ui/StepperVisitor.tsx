@@ -1,6 +1,8 @@
 import { Stepper } from "@mantine/core";
 import type { VisitorForm } from "../form";
 import type { VisitorInput } from "../../../types/visitor";
+import FormCard from "./FormCard";
+import HistoryCard from "./HistoryCard";
 
 type Props = {
   active: number;
@@ -24,18 +26,18 @@ export const StepperVisitor = ({
   error,
 }: Props) => (
   <Stepper active={active} onStepClick={setActive} className="w-[80%]" allowNextStepsSelect={false}>
-    <Stepper.Step label="Στοιχεία Επισκέπτη" description="Προσθήκη στοιχείων">
-      {/* <VisitorFormCard form={form} nextStep={nextStep} type="create" /> */}
+    <Stepper.Step label="Visitors Data" description="Add Data">
+      <FormCard form={form} nextStep={nextStep} type="create" />
     </Stepper.Step>
-    <Stepper.Step label="Ιστορικό" description="Προσθήκη ιατρικού ιστορικού">
-      {/* <VisitorHistory
+    <Stepper.Step label="Medical History" description="Add Medical History">
+      <HistoryCard
         form={form}
-        prevStep={prevStep}
-        add={add}
-        isLoading={isLoading}
+        onBack={prevStep}
+        onSubmit={add}
+        submitting={isLoading}
         error={error}
-        type="create"
-      /> */}
+        mode="create"
+      />
     </Stepper.Step>
   </Stepper>
 );

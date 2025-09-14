@@ -7,7 +7,7 @@ import ReferenceDataAddForm from './ReferenceDataAddForm.tsx';
 
 type Props = { title: string; addTitle: string; entity: RefEntity };
 
-export default function CatalogTable({ title, entity }: Props) {
+export default function CatalogTable({ title,addTitle, entity }: Props) {
 
   const { data, isLoading, isError } = useQuery({
       queryKey: constantsQK.list(entity),
@@ -68,7 +68,7 @@ export default function CatalogTable({ title, entity }: Props) {
             </Table>
           </Table.ScrollContainer>
         )}
-        <ReferenceDataAddForm title={title} entity={entity} />
+        <ReferenceDataAddForm addTitle={addTitle} entity={entity} />
       </div>
     </div>
   );

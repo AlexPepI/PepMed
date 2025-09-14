@@ -4,9 +4,9 @@ import { useMediaQuery } from '@mantine/hooks';
 import { useAddConstant } from '../hooks/useAdd';
 import type { RefEntity } from '../api';
 
-type Props = { title: string; entity: RefEntity };
+type Props = {  addTitle: string; entity: RefEntity };
 
-export default function ReferenceDataAddForm({ title, entity }: Props) {
+export default function ReferenceDataAddForm({ addTitle, entity }: Props) {
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = isDesktop ? 'md' : 'sm';
 
@@ -25,7 +25,7 @@ export default function ReferenceDataAddForm({ title, entity }: Props) {
       <Input
         size={size}
         radius="xl"
-        placeholder={`Add New ${title}`}
+        placeholder={addTitle}
         className="min-w-[180px] w-[50%]"
         value={value}
         onChange={(e) => setValue(e.currentTarget.value)}
