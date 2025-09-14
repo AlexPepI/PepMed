@@ -1,7 +1,7 @@
 from .database import Base
-from sqlalchemy import Table,Column,ForeignKey,Integer,Float,String,Enum,Boolean,Text,Date,TIMESTAMP,text,desc
+from sqlalchemy import Table,Column,ForeignKey,Integer,String,Enum,Text,Date,TIMESTAMP,text
 from sqlalchemy.orm import relationship
-from schemas.visitor import GenderEnum
+from schemas.visitor import GenderEnum,SmokerEnum
 
 visit_medicines = Table(
     "visit_medicines",
@@ -79,7 +79,7 @@ class Visitor(Base):
     amka = Column(String(12),nullable=False,unique=True)
     weight = Column(Integer,nullable=False)
     height = Column(Integer,nullable=False)
-    smoker = Column(Boolean,nullable=False)
+    smoker = Column(Enum(SmokerEnum),nullable=False)
     email = Column(String(60),nullable=True)
     phone_number=Column(String(25),nullable=True)
     history = Column(Text,nullable=True)
@@ -108,10 +108,10 @@ class Visitor(Base):
     )
     latest_visit = relationship(
         "Visit",
-        uselist=False,           # single object instead of list
-        order_by=Visit.created_at.desc(),  # bind to the column
-        lazy="selectin",                          # avoid JOIN + LIMIT issues
-        viewonly=True            # don’t try to persist through this attr
+        uselist=False,  
+        order_by=Visit.created_at.desc(),  
+        lazy="selectin",                         
+        viewonly=True           
     )
 
 class VisitFile(Base):

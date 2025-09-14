@@ -35,7 +35,7 @@ def create_new_visitor(visitor: VisitorCreate,medicines: list[MedicineUsage],dis
     except IntegrityError as ie:
         db.rollback()
         if "amka" in str(ie.orig):
-            raise HTTPException(400, "Ο χρήστης με αυτό το ΑΜΚΑ υπάρχει ήδη.")
+            raise HTTPException(400, "This Personal Number already exists")
         raise HTTPException(500, "Unexpected error.")
 
 @router.put("/{id}", response_model=VisitorResponse)

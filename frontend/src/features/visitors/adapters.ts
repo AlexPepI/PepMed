@@ -9,7 +9,7 @@ type CreateVisitorRequest = {
     amka: string;
     weight: number;
     height: number;
-    smoker: boolean;
+    smoker: "smoker" | "non_smoker" | "ex_smoker";
     years_smoking: number;
     cig_per_day: number;
     email: string | null;
@@ -30,7 +30,10 @@ const toApiDate = (d: unknown): string => {
   return isNaN(parsed.getTime()) ? "" : parsed.toISOString().slice(0, 10);
 };
 const toNum = (v: string | number | null | undefined) => (v ? Number(v) : 0);
-const toBool = (s: string) => s === "Yes";
+
+const toSmoker = (s: string) : "smoker" | "non_smoker" | "ex_smoker" =>
+  s === "Smoker" ? "smoker" : s === "Non-smoker" ? "non_smoker" : "ex_smoker";
+
 const toGender = (g: string): "male" | "female" | "other" =>
   g === "Male" ? "male" : g === "Female" ? "female" : "other";
 
@@ -44,7 +47,7 @@ export function buildCreateVisitorPayload(v: VisitorInput): CreateVisitorRequest
         amka: v.amka.trim(),
         weight: toNum(v.weight as any),
         height: toNum(v.height as any),
-        smoker: toBool(v.smoker as any),
+        smoker: toSmoker(v.smoker as any),
         years_smoking: toNum(v.years_smoking as any),
         cig_per_day: toNum(v.cig_per_day as any),
         email: nullIfEmpty(v.email),
@@ -55,4 +58,3 @@ export function buildCreateVisitorPayload(v: VisitorInput): CreateVisitorRequest
     diseases: (v.diseases ?? []).map(({ id }) => ({ id: Number(id) })),
   };
 }
-

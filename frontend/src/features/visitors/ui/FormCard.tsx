@@ -55,7 +55,7 @@ function FormCard({ nextStep, form, type }: Props) {
               withAsterisk
               key={form.key("smoker")}
               {...form.getInputProps("smoker")}
-              data={["Yes", "No"]}
+              data={["Smoker", "Non-smoker","Ex-smoker"]}
             />
             <TextInput label="Weight (Kg)" placeholder="Weight" withAsterisk mt="md" key={form.key("weight")} {...form.getInputProps("weight")} />
             <TextInput label="Height (cm)" placeholder="Height" withAsterisk mt="md" key={form.key("height")} {...form.getInputProps("height")} />

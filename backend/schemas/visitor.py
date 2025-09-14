@@ -11,6 +11,11 @@ class GenderEnum(enum.Enum):
     female ="female"
     other ="other"
 
+class SmokerEnum(enum.Enum):
+    smoker = "smoker"
+    non_smoker="non_smoker"
+    ex_smoker="ex_smoker"
+
 class VisitorBase(BaseModel):
     name : str
     surname : str
@@ -19,7 +24,7 @@ class VisitorBase(BaseModel):
     amka : str
     weight : int
     height : float
-    smoker : bool
+    smoker : SmokerEnum
     years_smoking:Optional[int] = None
     cig_per_day:Optional[int] = None
 

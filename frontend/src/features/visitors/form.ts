@@ -9,7 +9,7 @@ export const newVisitorInitialValues: VisitorInput = {
   amka: "",
   weight: "",
   height: "",
-  smoker: "No",
+  smoker: "Non-smoker",
   years_smoking: "",
   cig_per_day: "",
   email: "",
@@ -32,12 +32,12 @@ export const buildNewVisitorForm = (initial: VisitorInput) =>
 
       phoneNumber: (v) => {
         if (!v.trim()) return null;
-        const len = hasLength({ min: 10, max: 10 }, "Provide a phone number that exists")(v);
+        const len = hasLength({ min: 5, max: 20 }, "Provide a phone number that exists")(v);
         if (len) return len;
         if (!/^\d+$/.test(v.trim())) return "It must be a number";
       },
 
-      amka: hasLength({ min: 11, max: 11 }, "Provide a real personal number"),
+      amka: hasLength({ min: 5, max: 20 }, "Provide a real personal number"),
 
       weight: (v) => {
         const filled = isNotEmpty("Please, fill out this field")(v);
