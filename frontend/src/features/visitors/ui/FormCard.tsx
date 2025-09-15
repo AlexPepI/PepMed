@@ -28,7 +28,7 @@ function FormCard({ nextStep, form, type }: Props) {
               <TextInput label="Name" placeholder="Name" withAsterisk key={form.key("name")} {...form.getInputProps("name")} />
               <TextInput label="Surname" placeholder="Surname" withAsterisk key={form.key("surname")} {...form.getInputProps("surname")} />
               <TextInput label="E-mail" placeholder="E-mail" mt="md" key={form.key("email")} {...form.getInputProps("email")} />
-              <TextInput label="Phone number" placeholder="Κινητό Τηλέφωνο" mt="md" key={form.key("phoneNumber")} {...form.getInputProps("phoneNumber")} />
+              <TextInput label="Phone number" placeholder="Phone number" mt="md" key={form.key("phoneNumber")} {...form.getInputProps("phoneNumber")} />
             </div>
           </Card.Section>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
