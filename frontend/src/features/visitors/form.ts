@@ -55,4 +55,5 @@ export const buildNewVisitorForm = (initial: VisitorInput) =>
       },
     },
   });
+  
 export type VisitorForm = ReturnType<typeof buildNewVisitorForm>;

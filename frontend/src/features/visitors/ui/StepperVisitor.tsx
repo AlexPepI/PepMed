@@ -3,6 +3,7 @@ import type { VisitorForm } from "../form";
 import type { VisitorInput } from "../../../types/visitor";
 import FormCard from "./FormCard";
 import HistoryCard from "./HistoryCard";
+import { useNavigate } from "react-router";
 
 type Props = {
   active: number;
@@ -24,20 +25,43 @@ export const StepperVisitor = ({
   add,
   isLoading,
   error,
-}: Props) => (
-  <Stepper active={active} onStepClick={setActive} className="w-[80%]" allowNextStepsSelect={false}>
-    <Stepper.Step label="Visitors Data" description="Add Data">
-      <FormCard form={form} nextStep={nextStep} type="create" />
-    </Stepper.Step>
-    <Stepper.Step label="Medical History" description="Add Medical History">
-      <HistoryCard
-        form={form}
-        onBack={prevStep}
-        onSubmit={add}
-        submitting={isLoading}
-        error={error}
-        mode="create"
-      />
-    </Stepper.Step>
-  </Stepper>
-);
+}: Props) => {
+  
+  const navigate = useNavigate();
+  
+  const handleSubmit = async (values: VisitorInput) => {
+    try {
+
+      const created = await add(values);
+      const newId: number | undefined =
+        created?.id ?? created?.data?.id ?? created?.visitor?.id;
+
+      if (newId) {
+        navigate(`/new-visit/${newId}`, {
+          state: { visitor: { ...values, id: newId } },
+        });
+      }
+    } catch {
+
+    }
+  };
+
+  
+  return(
+    <Stepper active={active} onStepClick={setActive} className="w-[80%]" allowNextStepsSelect={false}>
+      <Stepper.Step label="Visitors Data" description="Add Data">
+        <FormCard form={form} nextStep={nextStep} type="create" />
+      </Stepper.Step>
+      <Stepper.Step label="Medical History" description="Add Medical History">
+        <HistoryCard
+          form={form}
+          onBack={prevStep}
+          onSubmit={handleSubmit}
+          submitting={isLoading}
+          error={error}
+          mode="create"
+        />
+      </Stepper.Step>
+    </Stepper>
+  )
+};

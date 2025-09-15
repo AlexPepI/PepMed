@@ -75,18 +75,20 @@ function HistoryCard({
         <div className="flex flex-wrap">
           <div className="md:w-[20%] min-w-[160px] w-[100%] mt-4 m-auto">
             <MultiSelectConst
-            type="medicine"
-            title="Medications"
-            placeholder="Medications"
-            form={form}
+              placeholder="Add Medication"
+              type="medicine"
+              title="Medication"
+              value={form.values.medicines ?? []}
+              onChange={(next) => form.setFieldValue('medicines', next)}
             />
           </div>
           <div className="md:w-[20%] min-w-[160px] w-[100%] mt-4 m-auto">
             <MultiSelectConst
-            type="disease"
-            title="Conditions"
-            placeholder="Conditions"
-            form={form}
+              placeholder="Add Condition"
+              type="disease"
+              title="Condition"
+              value={form.values.diseases ?? []}
+              onChange={(next) => form.setFieldValue('diseases', next)}
             />
           </div>
         </div>

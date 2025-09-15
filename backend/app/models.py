@@ -76,7 +76,7 @@ class Visitor(Base):
     surname = Column(String(25),nullable=False)
     birth_date = Column(Date,nullable=False)
     gender = Column(Enum(GenderEnum),nullable=False)
-    amka = Column(String(12),nullable=False,unique=True)
+    amka = Column(String(20),nullable=False,unique=True)
     weight = Column(Integer,nullable=False)
     height = Column(Integer,nullable=False)
     smoker = Column(Enum(SmokerEnum),nullable=False)

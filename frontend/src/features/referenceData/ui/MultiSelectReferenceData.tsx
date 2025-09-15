@@ -1,28 +1,27 @@
 import { MultiSelect } from "@mantine/core";
 import { useConstants } from "../hooks/useConstants";
-import type { VisitorForm } from "../../visitors/form";
 
 type Kind = "medicine" | "symptom" | "disease";
-
-const fieldByType: Record<Kind, "medicines" | "symptoms" | "diseases"> = {
-  medicine: "medicines",
-  symptom: "symptoms",
-  disease: "diseases",
-};
+type IdRef = { id: number };
 
 type Props = {
   type: Kind;
   title: string;
   placeholder: string;
-  form: VisitorForm;
+  value: IdRef[];
+  onChange: (next: IdRef[]) => void;
 };
 
-export default function MultiSelectConst({ type, title, placeholder, form }: Props) {
-  const { data, refresh } = useConstants(type);
-  const field = fieldByType[type];
+export default function MultiSelectConst({
+  type,
+  title,
+  placeholder,
+  value,
+  onChange,
+}: Props) {
+  const { data = [], refresh } = useConstants(type);
 
-  const value: string[] =
-    (form.values as any)[field]?.map((o: { id: number }) => String(o.id)) ?? [];
+  const selectedIds = value?.map((o) => String(o.id)) ?? [];
 
   return (
     <MultiSelect
@@ -30,10 +29,8 @@ export default function MultiSelectConst({ type, title, placeholder, form }: Pro
       placeholder={placeholder}
       label={title}
       data={data.map((i) => ({ value: String(i.id), label: i.name }))}
-      value={value}
-      onChange={(selected) =>
-        form.setFieldValue(field, selected.map((id) => ({ id: Number(id) })))
-      }
+      value={selectedIds}
+      onChange={(ids) => onChange(ids.map((id) => ({ id: Number(id) })))}
     />
   );
 }
