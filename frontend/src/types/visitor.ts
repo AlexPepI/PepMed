@@ -15,3 +15,17 @@ export type VisitorInput = {
   medicines: any[];
   diseases: any[];
 };
+
+export type Visitor = {
+  id: number;
+  name: string;
+  surname: string;
+  amka: string;
+  latest_visit: string | null;
+};
+
+export type VisitorsHomePage = {
+  visitors: Visitor[];
+  next_cursor: number;
+  has_more: boolean;
+};
