@@ -29,3 +29,32 @@ export type VisitorsHomePage = {
   next_cursor: number;
   has_more: boolean;
 };
+
+export type VisitSummary = {
+  id: number | null;
+  diagnosis: string | null;
+  created_at: string | null;
+};
+
+export type DiseaseRef = { id: number; name: string };
+export type MedicineLink = { medicine: { id: number; name: string }; until: string | null };
+
+export interface VisitorDetail {
+  id: number | null;
+  name: string | null;
+  surname: string | null;
+  amka: string | null;
+  birth_date: string | null;
+  gender: "male" | "female" | "other" | null;
+  email: string | null;
+  phone_number: string | null;
+  smoker: boolean;
+  years_smoking: number | null;
+  cig_per_day: number | null;
+  height: number | null;
+  weight: number | null;
+  history: string | null;
+  diseases: DiseaseRef[];
+  medicines_links: MedicineLink[];
+  visits: VisitSummary[];
+}

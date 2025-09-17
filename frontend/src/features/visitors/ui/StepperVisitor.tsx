@@ -14,6 +14,7 @@ type Props = {
   add: (payload: VisitorInput) => Promise<any>;
   isLoading: boolean;
   error: unknown;
+  setOverlay:(n: boolean) => void;
 };
 
 export const StepperVisitor = ({
@@ -25,13 +26,14 @@ export const StepperVisitor = ({
   add,
   isLoading,
   error,
+  setOverlay
 }: Props) => {
   
   const navigate = useNavigate();
   
   const handleSubmit = async (values: VisitorInput) => {
     try {
-
+      setOverlay(true)
       const created = await add(values);
       const newId: number | undefined =
         created?.id ?? created?.data?.id ?? created?.visitor?.id;
@@ -42,7 +44,7 @@ export const StepperVisitor = ({
         });
       }
     } catch {
-
+      setOverlay(false)
     }
   };
 

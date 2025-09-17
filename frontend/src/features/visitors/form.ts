@@ -37,7 +37,12 @@ export const buildNewVisitorForm = (initial: VisitorInput) =>
         if (!/^\d+$/.test(v.trim())) return "It must be a number";
       },
 
-      amka: hasLength({ min: 5, max: 20 }, "Provide a real personal number"),
+      amka: (v) => {
+        const len = hasLength({ min: 5, max: 20 }, "Provide a real personal number")(v);
+        if (len) return len;
+        if (!/^\d+$/.test(v.trim())) return "It must be a number";
+        return null;
+      },
 
       weight: (v) => {
         const filled = isNotEmpty("Please, fill out this field")(v);

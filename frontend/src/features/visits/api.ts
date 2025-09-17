@@ -1,5 +1,5 @@
 import { api } from '../../lib/api';
-import type { CreateVisitPayload, VisitInput } from '../../types/visit';
+import type { CreateVisitPayload, VisitInput,VisitDetail } from '../../types/visit';
 
 export function buildCreateVisitPayload(v: VisitInput): CreateVisitPayload {
   const trim = (s: string) => s.trim();
@@ -21,4 +21,18 @@ export async function createVisit(visitorId: number, payload: CreateVisitPayload
     params: { visitor_id: visitorId },
   });
   return data;
+}
+
+export async function getVisitById(id: number): Promise<VisitDetail> {
+  const { data } = await api.get(`/api/visit/${id}`);
+  return data as VisitDetail;
+}
+
+export async function getFileBlob(fileId: number): Promise<Blob> {
+  const { data } = await api.get(`/api/files/${fileId}`, { responseType: "blob" });
+  return data as Blob;
+}
+
+export async function deleteFile(fileId: number): Promise<void> {
+  await api.delete(`/api/files/${fileId}`);
 }

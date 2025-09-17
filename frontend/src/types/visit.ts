@@ -21,3 +21,18 @@ export type CreateVisitPayload = {
   symptoms: IdRef[];
   medicines: IdRef[];
 };
+
+export type VisitFileRef = { id: number; name?: string | null };
+
+export type VisitDetail = {
+  id: number;
+  diagnosis: string;
+  comments: string;
+  reason: string;
+  examination: string;
+  control: string | null;
+  created_at: string;
+  files: VisitFileRef[];
+  medicines: { id: number; name: string }[];
+  symptoms: { id: number; name: string }[];
+};

@@ -5,6 +5,7 @@ import FormCard from '../../features/visits/ui/FormCard';
 import { useAddVisit } from '../../features/visits/hooks/useAddVisit';
 import { uploadFiles } from '../../features/visits/uploadFiles';
 import type { Queued } from '../../features/visits/ui/FilesBox';
+import BlockingOverlay from '../../components/Feedback/BlockingOverlay';
 
 type LocationState = { visitor?: { id: number; name: string; surname: string } };
 
@@ -21,6 +22,7 @@ export default function NewVisitPage() {
 
   const form = buildNewVisitForm();
   const [files, setFiles] = useState<Queued[]>([]);
+  const [overlay,setOverlay] = useState<boolean>(false)
   const { add, isLoading, error } = useAddVisit();
   const submittingRef = useRef(false);
 
@@ -29,6 +31,7 @@ export default function NewVisitPage() {
     if (submittingRef.current) return;
     submittingRef.current = true;
     try {
+      setOverlay(true)
       const created = await add({ visitorId: Number(id), input: form.values });
       const visitId: number | undefined = created?.id ?? created?.data?.id;
       if (visitId && files.length > 0) {
@@ -37,20 +40,24 @@ export default function NewVisitPage() {
         setFiles([]);}
         navigate('/');
     } catch {
+      setOverlay(false)
     } 
   };
 
   if (!visitor || !id) return null;
 
   return (
-    <FormCard
-      form={form}
-      visitor={visitor}
-      onSubmit={onSubmit}
-      isLoading={isLoading}
-      error={error}
-      files={files}
-      setFiles={setFiles}
-    />
+    <>
+      <FormCard
+        form={form}
+        visitor={visitor}
+        onSubmit={onSubmit}
+        isLoading={isLoading}
+        error={error}
+        files={files}
+        setFiles={setFiles}
+      />
+      <BlockingOverlay visible={overlay} label="Creating visit..." />
+    </>
   );
 }
