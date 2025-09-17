@@ -29,3 +29,9 @@ export async function getVisitorById(id: number): Promise<GetVisitorByIdResponse
   const { data } = await api.get(`/api/visitor/${id}`);
   return data as GetVisitorByIdResponse;
 }
+
+export async function updateVisitor(id: number, data: VisitorInput) {
+  const payload = buildCreateVisitorPayload(data);
+  const res = await api.put(`/visitor/${id}`, payload);
+  return res.data;
+}

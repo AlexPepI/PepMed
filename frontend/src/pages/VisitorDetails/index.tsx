@@ -63,18 +63,18 @@ const VisitorDetailsPage = () => {
         <Divider className="mt-3" />
 
         <div className="flex flex-col md:flex-row justify-between items-stretch">
-<div ref={ref} className="mt-5 flex w-[100%] md:w-[40%]">
-  <CardDetails user={data} />
-</div>
-<div className="mt-5 flex w-[100%] md:w-[55%]">
-  {!!data.visits?.length && (
-    <VisitsCard
-      maxHeight={height || 400} // fallback so it’s never 0
-      visits={data.visits}
-      user={{ name: data.name, surname: data.surname, amka: data.amka }}
-    />
-  )}
-</div>
+          <div ref={ref} className="mt-5 flex w-[100%] md:w-[40%]">
+            <CardDetails user={data} />
+          </div>
+          <div className="mt-5 flex w-[100%] md:w-[55%]">
+            {!!data.visits?.length && (
+              <VisitsCard
+                maxHeight={height || 400} 
+                visits={data.visits}
+                user={{ name: data.name, surname: data.surname, amka: data.amka }}
+              />
+            )}
+          </div>
         </div>
       </div>
     </>

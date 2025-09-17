@@ -19,10 +19,24 @@ export const newVisitorInitialValues: VisitorInput = {
   diseases: [],
 };
 
+const normalize = (v: any) => (v == null ? "" : String(v));
+
 export const buildNewVisitorForm = (initial: VisitorInput) =>
   useForm<VisitorInput>({
     mode: "controlled",
-    initialValues: initial,
+    initialValues: {
+      ...initial,
+      name: normalize(initial.name),
+      surname: normalize(initial.surname),
+      amka: normalize(initial.amka),
+      weight: normalize(initial.weight),
+      height: normalize(initial.height),
+      email: normalize(initial.email),
+      phoneNumber: normalize(initial.phoneNumber),
+      history: normalize(initial.history),
+      years_smoking: normalize(initial.years_smoking),
+      cig_per_day: normalize(initial.cig_per_day),
+    },
     validate: {
       name: isNotEmpty("Please, fill out this field"),
       surname: isNotEmpty("Please, fill out this field"),
