@@ -48,6 +48,7 @@ function FormCard({ nextStep, form, type }: Props) {
               mt="md"
               key={form.key("birth_date")}
               {...form.getInputProps("birth_date")}
+              maxDate={new Date()}
             />
             <NativeSelect
               label="Smoker"
