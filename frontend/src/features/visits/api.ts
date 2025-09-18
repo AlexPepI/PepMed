@@ -36,3 +36,33 @@ export async function getFileBlob(fileId: number): Promise<Blob> {
 export async function deleteFile(fileId: number): Promise<void> {
   await api.delete(`/api/files/${fileId}`);
 }
+
+
+const nullIfEmpty = (s: string | null | undefined) =>
+  s && s.trim() !== "" ? s.trim() : null;
+
+const trim = (s: string | null | undefined) => (s ?? "").trim();
+
+export function buildUpdateVisitPayload(v: VisitInput) {
+  return {
+    visit: {
+      diagnosis: trim(v.diagnosis as unknown as string),
+      comments: trim(v.comments as unknown as string),
+      reason: trim(v.reason as unknown as string),
+      examination: trim(v.examination as unknown as string),
+      control: nullIfEmpty(v.control as unknown as string),
+    },
+    medicines: (v.medicines ?? []).map(({ id }: { id: number | string }) => ({
+      id: Number(id),
+    })),
+    symptoms: (v.symptoms ?? []).map(({ id }: { id: number | string }) => ({
+      id: Number(id),
+    })),
+  };
+}
+
+export async function updateVisit(id: number, data: VisitInput) {
+  const payload = buildUpdateVisitPayload(data);
+  const res = await api.put(`/visit/${id}`, payload);
+  return res.data;
+}

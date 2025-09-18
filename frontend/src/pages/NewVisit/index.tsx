@@ -56,6 +56,7 @@ export default function NewVisitPage() {
         error={error}
         files={files}
         setFiles={setFiles}
+        mode="create"
       />
       <BlockingOverlay visible={overlay} label="Creating visit..." />
     </>

@@ -26,13 +26,18 @@ const BasicInfoRows = ({
     return bmi.toFixed(1);
   };
 
-  const ageText = () => {
-    if (!birth_date) return "—";
-    const res = dobToAge(birth_date);
-    return `${res.count} ${
-      res.unit === "years" ? "Χρονών" : res.unit === "months" ? "Μηνών" : "Ημερών"
-    }`;
-  };
+const ageText = () => {
+  if (!birth_date) return "—";
+  const res = dobToAge(birth_date);
+  if (!res || !res.count || !res.unit) return "—";
+  return `${res.count} ${
+    res.unit === "years"
+      ? "Χρονών"
+      : res.unit === "months"
+      ? "Μηνών"
+      : "Ημερών"
+  }`;
+};
 
   return (
     <>

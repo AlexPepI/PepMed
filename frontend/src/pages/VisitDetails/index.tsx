@@ -6,13 +6,14 @@ import { useVisitDetails, getVisitDetailsError } from "../../features/visits/hoo
 import VisitDetailsCard from "../../features/visits/ui/DetailsCard";
 import FileViewer from "../../features/visits/ui/FileViewer";
 import FileUploadModal from "../../features/visits/ui/FileUploadModal";
+import UpdateVisitButton from "../../features/visits/ui/ButtonUpdate";
 
 type HeaderState = { name: string; surname: string; amka: string };
 
 const VisitDetailsPage = () => {
   const { id } = useParams();
   const location = useLocation();
-  const header = (location.state || {}) as HeaderState;
+  const visitor = (location.state || {}) as HeaderState;
   const visitId = useMemo(() => (id ? Number(id) : undefined), [id]);
 
   const smallerThanMd = useMediaQuery("(max-width: 768px)");
@@ -46,7 +47,7 @@ const VisitDetailsPage = () => {
             marginLeft: smallerThanMd ? "" : "2rem",
           }}
         >
-          {header.name} {header.surname}
+          {visitor.name} {visitor.surname}
         </Title>
         <div className="flex items-center md:mt-3 md:ml-10">
           <Title
@@ -56,7 +57,7 @@ const VisitDetailsPage = () => {
               marginRight: smallerThanMd ? "" : "2rem",
             }}
           >
-            A.M.K.Α : {header.amka}
+            A.M.K.Α : {visitor.amka}
           </Title>
         </div>
       </div>
@@ -78,6 +79,7 @@ const VisitDetailsPage = () => {
               <FileViewer visit={data} />
               <div className="flex justify-end mb-3">
                 <FileUploadModal visitId={data.id} />
+                <UpdateVisitButton visitor={visitor} visit={data}/>
               </div>
             </Card>
           </div>
@@ -87,6 +89,7 @@ const VisitDetailsPage = () => {
             <VisitDetailsCard visit={data} />
             <div className="flex justify-end mb-3">
               <FileUploadModal visitId={data.id} />
+              <UpdateVisitButton visitor={visitor} visit={data}/>
             </div>
           </Card>
         )}
