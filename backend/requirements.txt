@@ -6,3 +6,5 @@ email-validator
 psycopg2-binary
 watchfiles
 python-multipart
+weasyprint
+jinja2

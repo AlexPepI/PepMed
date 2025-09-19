@@ -6,6 +6,8 @@ import os
 from uuid import uuid4
 from app.database import get_db
 from app import models
+from fastapi.responses import Response
+from services.pdf_service import generate_pdf, NotFoundError, PdfRenderError
 
 router = APIRouter(
     prefix="/files",
@@ -13,6 +15,20 @@ router = APIRouter(
 )
 
 MEDIA_ROOT = os.getenv("MEDIA_ROOT", "media")
+@router.get("/html-to-pdf", response_class=Response)
+def html_to_pdf() -> Response:
+    try:
+        pdf_bytes, pdf_name = generate_pdf()  # no input
+    except NotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except PdfRenderError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    headers = {
+        "Content-Disposition": f'attachment; filename="{pdf_name}"',
+        "Cache-Control": "no-store",
+    }
+    return Response(content=pdf_bytes, media_type="application/pdf", headers=headers)
 
 @router.post("/",status_code=status.HTTP_201_CREATED)
 async def add_files_to_visit(
@@ -54,12 +70,11 @@ def get_file(file_id: int, db: Session = Depends(get_db)):
     abs_path = os.path.join(MEDIA_ROOT, vf.storage_key)
     if not os.path.isfile(abs_path):
         raise HTTPException(404, "File missing on disk")
-
-    # IMPORTANT: use filename=  (builds a safe Content-Disposition)
+    
     return FileResponse(
         abs_path,
         media_type="application/pdf",
-        filename=vf.original_name,   # keep the original name safely
+        filename=vf.original_name,   
     )
 
 @router.delete("/{file_id}", status_code=status.HTTP_204_NO_CONTENT)
