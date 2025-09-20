@@ -5,7 +5,7 @@ export const newVisitorInitialValues: VisitorInput = {
   name: "",
   surname: "",
   birth_date: null,
-  gender: "Άνδρας",
+  gender: "Male",
   amka: "",
   weight: "",
   height: "",

@@ -7,7 +7,8 @@ from uuid import uuid4
 from app.database import get_db
 from app import models
 from fastapi.responses import Response
-from services.pdf_service import generate_pdf, NotFoundError, PdfRenderError
+from services.pdf_service import generate_pdf_for_visit, NotFoundError, PdfRenderError
+from sqlalchemy.orm import Session
 
 router = APIRouter(
     prefix="/files",
@@ -15,20 +16,25 @@ router = APIRouter(
 )
 
 MEDIA_ROOT = os.getenv("MEDIA_ROOT", "media")
-@router.get("/html-to-pdf", response_class=Response)
-def html_to_pdf() -> Response:
+@router.get("/html-to-pdf/{visit_id}", response_class=Response)
+def html_to_pdf(visit_id: int, db: Session = Depends(get_db)) -> Response:
     try:
-        pdf_bytes, pdf_name = generate_pdf()  # no input
+        pdf_bytes, pdf_name = generate_pdf_for_visit(
+            db, visit_id
+        )
     except NotFoundError as e:
         raise HTTPException(status_code=404, detail=str(e))
     except PdfRenderError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-    headers = {
-        "Content-Disposition": f'attachment; filename="{pdf_name}"',
-        "Cache-Control": "no-store",
-    }
-    return Response(content=pdf_bytes, media_type="application/pdf", headers=headers)
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={
+            "Content-Disposition": f'attachment; filename="{pdf_name}"',
+            "Cache-Control": "no-store",
+        },
+    )
 
 @router.post("/",status_code=status.HTTP_201_CREATED)
 async def add_files_to_visit(

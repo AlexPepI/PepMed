@@ -34,6 +34,7 @@ export const StepperVisitor = ({
   const handleSubmit = async (values: VisitorInput) => {
     try {
       setOverlay(true)
+      console.log(values)
       const created = await add(values);
       const newId: number | undefined =
         created?.id ?? created?.data?.id ?? created?.visitor?.id;
