@@ -6,27 +6,52 @@ from services.visit import create_visit,update_visit,RelatedObjectNotFound,Visit
 from schemas.symptom import SymptomId
 from schemas.medicine import MedicineId
 from crud.visit import get_details_for_visit_id
-
+import os
+from app import models
 
 router = APIRouter(
     prefix="/visit",
     tags=["Client's Visit"]
 )
+MEDIA_ROOT = os.getenv("MEDIA_ROOT", "media")
 
 @router.get("/{visit_id}",response_model=VisitResponse)
 def get_details_for_specific_visit(visit_id = int, db:Session = Depends(get_db) ):
     return get_details_for_visit_id(visit_id,db)
 
-@router.post("/",status_code=status.HTTP_201_CREATED,response_model=VisitResponse)
+@router.post("/", status_code=status.HTTP_201_CREATED, response_model=VisitResponse)
 def create_new_visit_for_visitor(
-    visitor_id:int,
-    new_visit:VisitCreate,
+    visitor_id: int,
+    new_visit: VisitCreate,
     symptoms: list[SymptomId],
     medicines: list[MedicineId],
-    db:Session = Depends(get_db)
+    db: Session = Depends(get_db)
 ):
     try:
-        return create_visit(db,visitor_id ,new_visit, symptoms, medicines)
+        visit = create_visit(db, visitor_id, new_visit, symptoms, medicines)
+
+        # ⬇️ generate PDF right after visit creation
+        from services.pdf_service import generate_pdf_for_visit
+        pdf_bytes, pdf_name = generate_pdf_for_visit(db, visit.id)
+
+        # build path like: MEDIA_ROOT/visits/{visit.id}/visit_{id}.pdf
+        visit_folder = os.path.join(MEDIA_ROOT, f"visits/{visit.id}")
+        os.makedirs(visit_folder, exist_ok=True)
+        pdf_path = os.path.join(visit_folder, pdf_name)
+
+        with open(pdf_path, "wb") as f:
+            f.write(pdf_bytes)
+
+        # optionally also save VisitFile record
+        vf = models.VisitFile(
+            visit_id=visit.id,
+            storage_key=f"visits/{visit.id}/{pdf_name}",
+            original_name=pdf_name
+        )
+        db.add(vf)
+        db.commit()
+
+        return visit
     except ValueError as ve:
         raise HTTPException(status_code=400, detail=str(ve))
     

@@ -7,6 +7,7 @@ import VisitDetailsCard from "../../features/visits/ui/DetailsCard";
 import FileViewer from "../../features/visits/ui/FileViewer";
 import FileUploadModal from "../../features/visits/ui/FileUploadModal";
 import UpdateVisitButton from "../../features/visits/ui/ButtonUpdate";
+import ExportPdfButton from "../../features/visits/ui/ExportPdfButton";
 
 type HeaderState = { name: string; surname: string; amka: string };
 
@@ -74,12 +75,13 @@ const VisitDetailsPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-[90%]">
             <Card shadow="sm" padding="lg" radius="md" withBorder>
               <VisitDetailsCard visit={data} />
+              <UpdateVisitButton visitor={visitor} visit={data}/>
             </Card>
             <Card shadow="sm" padding="lg" radius="md" withBorder>
               <FileViewer visit={data} />
               <div className="flex justify-end mb-3">
                 <FileUploadModal visitId={data.id} />
-                <UpdateVisitButton visitor={visitor} visit={data}/>
+                <ExportPdfButton visitId={Number(visitId)}/>
               </div>
             </Card>
           </div>

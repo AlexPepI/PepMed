@@ -66,3 +66,8 @@ export async function updateVisit(id: number, data: VisitInput) {
   const res = await api.put(`/visit/${id}`, payload);
   return res.data;
 }
+
+export const exportVisitPdf = (visitId: number) =>
+  api.get(`/files/export-pdf/${visitId}`, {
+    responseType: 'blob',
+  });

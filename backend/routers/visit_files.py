@@ -16,7 +16,7 @@ router = APIRouter(
 )
 
 MEDIA_ROOT = os.getenv("MEDIA_ROOT", "media")
-@router.get("/html-to-pdf/{visit_id}", response_class=Response)
+@router.get("/export-pdf/{visit_id}", response_class=Response)
 def html_to_pdf(visit_id: int, db: Session = Depends(get_db)) -> Response:
     try:
         pdf_bytes, pdf_name = generate_pdf_for_visit(
