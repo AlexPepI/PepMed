@@ -30,11 +30,9 @@ def create_new_visit_for_visitor(
     try:
         visit = create_visit(db, visitor_id, new_visit, symptoms, medicines)
 
-        # ⬇️ generate PDF right after visit creation
         from services.pdf_service import generate_pdf_for_visit
         pdf_bytes, pdf_name = generate_pdf_for_visit(db, visit.id)
 
-        # build path like: MEDIA_ROOT/visits/{visit.id}/visit_{id}.pdf
         visit_folder = os.path.join(MEDIA_ROOT, f"visits/{visit.id}")
         os.makedirs(visit_folder, exist_ok=True)
         pdf_path = os.path.join(visit_folder, pdf_name)
@@ -42,7 +40,6 @@ def create_new_visit_for_visitor(
         with open(pdf_path, "wb") as f:
             f.write(pdf_bytes)
 
-        # optionally also save VisitFile record
         vf = models.VisitFile(
             visit_id=visit.id,
             storage_key=f"visits/{visit.id}/{pdf_name}",
