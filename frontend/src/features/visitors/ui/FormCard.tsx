@@ -38,7 +38,12 @@ function FormCard({ nextStep, form, type }: Props) {
               withAsterisk
               key={form.key("gender")}
               {...form.getInputProps("gender")}
-              data={["Male", "Female", "Other"]}
+              onChange={(e) => form.setFieldValue("gender", e.currentTarget.value)}
+              data={[
+                { value: "male", label: "Male" },
+                { value: "female", label: "Female" },
+                { value: "other", label: "Other" },
+              ]}
             />
             <TextInput label="Personal Number" placeholder="Personal nuber" mt="md" key={form.key("amka")} {...form.getInputProps("amka")} />
             <DatePickerInput
@@ -56,7 +61,11 @@ function FormCard({ nextStep, form, type }: Props) {
               withAsterisk
               key={form.key("smoker")}
               {...form.getInputProps("smoker")}
-              data={["Smoker", "Non-smoker","Ex-smoker"]}
+              data={[
+                { value: "smoker", label: "Smoker" },
+                { value: "non_smoker", label: "No Smoker" },
+                { value: "ex_smoker", label: "Ex Smoker" },
+              ]}
             />
             <TextInput label="Weight (Kg)" placeholder="Weight" withAsterisk mt="md" key={form.key("weight")} {...form.getInputProps("weight")} />
             <TextInput label="Height (cm)" placeholder="Height" withAsterisk mt="md" key={form.key("height")} {...form.getInputProps("height")} />

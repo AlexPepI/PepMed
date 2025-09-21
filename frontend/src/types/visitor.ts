@@ -48,7 +48,7 @@ export interface VisitorDetail {
   gender: "male" | "female" | "other" | null;
   email: string | null;
   phone_number: string | null;
-  smoker: boolean;
+  smoker: "smoker" | "non_smoker" | "ex_smoker";
   years_smoking: number | null;
   cig_per_day: number | null;
   height: number | null;

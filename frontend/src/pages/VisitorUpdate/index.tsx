@@ -20,6 +20,7 @@ const VisitorUpdate = () => {
   const form = buildNewVisitorForm(location.state);
 
   const handleSubmit = async (values:VisitorInput) => {
+    console.log(values)
     await update(values)
     navigate(`/visitor-details/${id}`)
   }

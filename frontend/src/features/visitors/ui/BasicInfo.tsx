@@ -4,7 +4,7 @@ import dobToAge from "dob-to-age";
 type Props = {
   birth_date: string | null;
   gender: "male" | "female" | "other" | null;
-  smoker: boolean;
+  smoker: "smoker" | "non_smoker" | "ex_smoker";
   weight: number | null;
   height: number | null;
   years_smoking: number | null;
@@ -58,7 +58,7 @@ const ageText = () => {
       <div className="flex gap-4 justify-between flex-wrap">
         <div className="w-[40%] min-w-max">
           <Text>
-            <strong>Καπνιστής:</strong> {smoker ? "Ναι" : "Όχι"}
+            <strong>Καπνιστής:</strong> {smoker==="smoker" ? "Yes" : smoker==="non_smoker"? "No": "Ex Smoker"}
           </Text>
         </div>
         <div className="w-[40%] min-w-max">

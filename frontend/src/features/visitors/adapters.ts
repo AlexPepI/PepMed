@@ -6,7 +6,7 @@ type CreateVisitorRequest = {
     surname: string;
     birth_date: string;
     gender: "male" | "female" | "other";
-    amka: string;
+    amka: string | null;
     weight: number;
     height: number;
     smoker: "smoker" | "non_smoker" | "ex_smoker";
@@ -32,10 +32,10 @@ const toApiDate = (d: unknown): string => {
 const toNum = (v: string | number | null | undefined) => (v ? Number(v) : 0);
 
 const toSmoker = (s: string) : "smoker" | "non_smoker" | "ex_smoker" =>
-  s === "Smoker" ? "smoker" : s === "Non-smoker" ? "non_smoker" : "ex_smoker";
+  s === "smoker" ? "smoker" : s === "non-smoker" ? "non_smoker" : "ex_smoker";
 
 const toGender = (g: string): "male" | "female" | "other" =>
-  g === "Male" ? "male" : g === "Female" ? "female" : "other";
+  g === "male" ? "male" : g === "female" ? "female" : "other";
 
 export function buildCreateVisitorPayload(v: VisitorInput): CreateVisitorRequest {
   return {
@@ -44,7 +44,7 @@ export function buildCreateVisitorPayload(v: VisitorInput): CreateVisitorRequest
         surname: v.surname.trim(),
         birth_date: toApiDate(v.birth_date),
         gender: toGender(v.gender),
-        amka: v.amka.trim(),
+        amka: nullIfEmpty(v.amka),
         weight: toNum(v.weight as any),
         height: toNum(v.height as any),
         smoker: toSmoker(v.smoker as any),
