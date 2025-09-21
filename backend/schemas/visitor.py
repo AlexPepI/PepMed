@@ -21,7 +21,7 @@ class VisitorBase(BaseModel):
     surname : str
     birth_date : date
     gender : GenderEnum
-    amka : str
+    amka : Optional[str] = None
     weight : int
     height : float
     smoker : SmokerEnum
@@ -55,7 +55,7 @@ class VisitorHomepage(BaseModel):
     id : int
     name : str
     surname : str
-    amka : str
+    amka : Optional[str] 
     latest_visit : Optional[datetime] = None
 
     class Config:

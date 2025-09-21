@@ -40,7 +40,7 @@ function FormCard({ nextStep, form, type }: Props) {
               {...form.getInputProps("gender")}
               data={["Male", "Female", "Other"]}
             />
-            <TextInput label="Personal Number" placeholder="Personal nuber" withAsterisk mt="md" key={form.key("amka")} {...form.getInputProps("amka")} />
+            <TextInput label="Personal Number" placeholder="Personal nuber" mt="md" key={form.key("amka")} {...form.getInputProps("amka")} />
             <DatePickerInput
               label="Birth Date"
               placeholder="Birth Date"

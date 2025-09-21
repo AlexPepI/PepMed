@@ -76,7 +76,7 @@ class Visitor(Base):
     surname = Column(String(25),nullable=False)
     birth_date = Column(Date,nullable=False)
     gender = Column(Enum(GenderEnum),nullable=False)
-    amka = Column(String(20),nullable=False,unique=True)
+    amka = Column(String(20),nullable=True,unique=True)
     weight = Column(Integer,nullable=False)
     height = Column(Integer,nullable=False)
     smoker = Column(Enum(SmokerEnum),nullable=False)
@@ -129,7 +129,7 @@ class Medicine(Base):
     __tablename__ = "medicines"
 
     id = Column(Integer,primary_key=True,index=True)
-    name = Column(String(25),nullable=False)
+    name = Column(String(35),nullable=False)
     
     visitor_links = relationship(
         "VisitorMedicineLink",
@@ -146,7 +146,7 @@ class Symptom(Base):
     __tablename__ = "symptoms"
 
     id = Column(Integer,primary_key=True,index=True)
-    name = Column(String(25),nullable=False)
+    name = Column(String(35),nullable=False)
 
     visits = relationship(
         "Visit",
@@ -158,7 +158,7 @@ class Disease(Base):
     __tablename__ = "diseases"
 
     id = Column(Integer,primary_key=True,index=True)
-    name = Column(String(25),nullable=False)
+    name = Column(String(35),nullable=False)
 
     visitors = relationship(
         "Visitor",
