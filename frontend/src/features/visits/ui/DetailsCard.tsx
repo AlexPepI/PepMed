@@ -35,7 +35,9 @@ const VisitDetailsCard = ({ visit }: Props) => {
             <Title order={4}>Οδηγίες / Συμπεράσματα</Title>
           </div>
           <Divider />
-          {comments}
+          <div className="whitespace-pre-line">
+            {comments}
+          </div>
         </Paper>
       </div>
     </div>

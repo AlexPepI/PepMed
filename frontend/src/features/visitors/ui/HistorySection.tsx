@@ -12,7 +12,7 @@ const HistorySection = ({ history }: Props) => {
           <strong>Ιστορικό</strong>
         </Text>
         <Divider />
-        <Text className="flex flex-wrap ">{history}</Text>
+        <Text className="flex flex-wrap whitespace-pre-line">{history}</Text>
       </div>
     </Paper>
   );

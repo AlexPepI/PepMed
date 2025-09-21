@@ -9,7 +9,9 @@ const ExaminationSection = ({ examination }: Props) => (
         <Title order={4}>Κλινική Εξέταση</Title>
       </div>
       <Divider />
-      {examination || "—"}
+      <div className="whitespace-pre-line">
+        {examination || "—"}
+      </div>
     </Paper>
   </div>
 );

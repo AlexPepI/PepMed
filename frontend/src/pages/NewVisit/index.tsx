@@ -32,6 +32,7 @@ export default function NewVisitPage() {
     submittingRef.current = true;
     try {
       setOverlay(true)
+      console.log(form.values)
       const created = await add({ visitorId: Number(id), input: form.values });
       const visitId: number | undefined = created?.id ?? created?.data?.id;
       if (visitId && files.length > 0) {

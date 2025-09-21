@@ -11,7 +11,9 @@ const ControlSection = ({ control }: Props) => {
           <Title order={4}>Εργαστηριακός Έλεγχος</Title>
         </div>
         <Divider />
-        {control}
+        <div className="whitespace-pre-line">
+          {control}
+        </div>
       </Paper>
     </div>
   );
