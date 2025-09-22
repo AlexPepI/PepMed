@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, Modal, FileInput, Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useQueryClient } from "@tanstack/react-query";
-import {uploadFiles} from "../../../features/visits/uploadFiles";
+import { uploadFiles } from "../../../features/visits/uploadFiles";
 import { visit as visitKey } from "../../../features/visits/queryKeys";
 
 type Props = { visitId: number };
@@ -28,7 +28,9 @@ const FileUploadModal = ({ visitId }: Props) => {
 
   return (
     <>
-      <Button radius="xl" onClick={open}>Προσθήκη αρχείων</Button>
+      <Button radius="xl" onClick={open}>
+        Προσθήκη αρχείων
+      </Button>
       <Modal opened={opened} onClose={close} title="Ανέβασμα PDF" centered>
         <FileInput
           multiple
@@ -38,8 +40,12 @@ const FileUploadModal = ({ visitId }: Props) => {
           onChange={(v) => setFiles(v as File[] | null)}
         />
         <Group justify="flex-end" mt="md">
-          <Button variant="default" onClick={close}>Άκυρο</Button>
-          <Button loading={submitting} onClick={handleUpload}>Ανέβασμα</Button>
+          <Button variant="default" onClick={close}>
+            Άκυρο
+          </Button>
+          <Button loading={submitting} onClick={handleUpload}>
+            Ανέβασμα
+          </Button>
         </Group>
       </Modal>
     </>

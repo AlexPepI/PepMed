@@ -33,9 +33,7 @@ const VisitorCardDetails = ({ user }: Props) => {
 
       <Button
         className="self-end"
-        onClick={() =>
-          navigate(`/visitor-update/${user.id}`, { state: user })
-        }
+        onClick={() => navigate(`/visitor-update/${user.id}`, { state: user })}
       >
         Επεξεργασία
       </Button>

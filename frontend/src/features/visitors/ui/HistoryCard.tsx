@@ -19,13 +19,18 @@ function HistoryCard({
   onBack,
   onSubmit,
   submitting,
-  error
+  error,
 }: Props) {
-  const errMsg =
-    error instanceof Error ? error : error ? String(error) : "";
+  const errMsg = error instanceof Error ? error : error ? String(error) : "";
 
   return (
-    <Card className="w-[100%] md:w-[75%] mt-[5vh] m-auto" shadow="sm" padding="lg" radius="md" withBorder>
+    <Card
+      className="w-[100%] md:w-[75%] mt-[5vh] m-auto"
+      shadow="sm"
+      padding="lg"
+      radius="md"
+      withBorder
+    >
       <Card.Section withBorder inheritPadding py="xs">
         <div className="flex justify-center md:justify-normal">
           <Text size="xl" fw={500}>
@@ -50,7 +55,8 @@ function HistoryCard({
             />
           </div>
 
-          {(form.values.smoker === "smoker" || form.values.smoker === "ex_smoker") && (
+          {(form.values.smoker === "smoker" ||
+            form.values.smoker === "ex_smoker") && (
             <div className="flex justify-center">
               <div className="w-[100%] md:w-[50%] flex flex-col items-center md:flex-row md:flex-wrap justify-around gap-3">
                 <TextInput
@@ -79,7 +85,7 @@ function HistoryCard({
               type="medicine"
               title="Medication"
               value={form.values.medicines ?? []}
-              onChange={(next) => form.setFieldValue('medicines', next)}
+              onChange={(next) => form.setFieldValue("medicines", next)}
             />
           </div>
           <div className="md:w-[20%] min-w-[160px] w-[100%] mt-4 m-auto">
@@ -88,7 +94,7 @@ function HistoryCard({
               type="disease"
               title="Condition"
               value={form.values.diseases ?? []}
-              onChange={(next) => form.setFieldValue('diseases', next)}
+              onChange={(next) => form.setFieldValue("diseases", next)}
             />
           </div>
         </div>
@@ -97,16 +103,25 @@ function HistoryCard({
           <Button variant="default" radius="xl" onClick={onBack}>
             Back
           </Button>
-          <Button className="ml-[10px]" radius="xl" type="submit" disabled={submitting}>
+          <Button
+            className="ml-[10px]"
+            radius="xl"
+            type="submit"
+            disabled={submitting}
+          >
             {mode === "create" ? "Create" : "Update"}
           </Button>
         </div>
       </form>
-            {errMsg && (
+      {errMsg && (
         <div className="mt-4 mb-2 flex ">
-            <Alert color="red" title="Error" className="md:w-[50%] min-w-[160px] w-[100%] m-auto">
-                {getErrorMessage(error)}
-            </Alert>
+          <Alert
+            color="red"
+            title="Error"
+            className="md:w-[50%] min-w-[160px] w-[100%] m-auto"
+          >
+            {getErrorMessage(error)}
+          </Alert>
         </div>
       )}
     </Card>

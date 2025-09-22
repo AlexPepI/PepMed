@@ -1,6 +1,10 @@
 import { IconHome, IconUserPlus } from "@tabler/icons-react";
 
-export type NavItem = { path: string; label: string; icon: React.FC<{ size?: number }> };
+export type NavItem = {
+  path: string;
+  label: string;
+  icon: React.FC<{ size?: number }>;
+};
 
 export const NAV_ITEMS: NavItem[] = [
   { path: "/", label: "Home", icon: IconHome },

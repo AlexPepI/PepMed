@@ -10,7 +10,15 @@ type Props = {
 };
 
 const VisitDetailsCard = ({ visit }: Props) => {
-  const { diagnosis, comments, reason, examination, control, medicines, symptoms } = visit;
+  const {
+    diagnosis,
+    comments,
+    reason,
+    examination,
+    control,
+    medicines,
+    symptoms,
+  } = visit;
 
   return (
     <div className="flex flex-col w-[90%] h-full gap-3 ml-auto mr-auto">
@@ -30,14 +38,19 @@ const VisitDetailsCard = ({ visit }: Props) => {
       <MedicinesList medicines={medicines} />
 
       <div className="flex justify-center">
-        <Paper className="w-[100%] md:w-[70%]" radius="md" p="md" withBorder shadow="md" bg="dark.7">
+        <Paper
+          className="w-[100%] md:w-[70%]"
+          radius="md"
+          p="md"
+          withBorder
+          shadow="md"
+          bg="dark.7"
+        >
           <div className="flex justify-center">
             <Title order={4}>Οδηγίες / Συμπεράσματα</Title>
           </div>
           <Divider />
-          <div className="whitespace-pre-line">
-            {comments}
-          </div>
+          <div className="whitespace-pre-line">{comments}</div>
         </Paper>
       </div>
     </div>

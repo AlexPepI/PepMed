@@ -20,25 +20,27 @@ const BasicInfoRows = ({
   years_smoking,
   cig_per_day,
 }: Props) => {
-  const calculateBMI = (weight: number | null, height: number | null): string => {
+  const calculateBMI = (
+    weight: number | null,
+    height: number | null
+  ): string => {
     if (!weight || !height || height === 0) return "N/A";
-    const bmi = weight / ((height / 100) ** 2);
+    const bmi = weight / (height / 100) ** 2;
     return bmi.toFixed(1);
   };
 
-const ageText = () => {
-  if (!birth_date) return "—";
-  const res = dobToAge(birth_date);
-  if (!res || !res.count || !res.unit) return "—";
-  return `${res.count} ${
-    res.unit === "years"
-      ? "Χρονών"
-      : res.unit === "months"
-      ? "Μηνών"
-      : "Ημερών"
-  }`;
-};
-
+  const ageText = () => {
+    if (!birth_date) return "—";
+    const res = dobToAge(birth_date);
+    if (!res || !res.count || !res.unit) return "—";
+    return `${res.count} ${
+      res.unit === "years"
+        ? "Χρονών"
+        : res.unit === "months"
+        ? "Μηνών"
+        : "Ημερών"
+    }`;
+  };
 
   return (
     <>
@@ -51,7 +53,11 @@ const ageText = () => {
         <div className="w-[40%] min-w-max">
           <Text>
             <strong>Φύλο:</strong>{" "}
-            {gender === "male" ? "Άνδρας" : gender === "female" ? "Γυναίκα" : "Άλλο"}
+            {gender === "male"
+              ? "Άνδρας"
+              : gender === "female"
+              ? "Γυναίκα"
+              : "Άλλο"}
           </Text>
         </div>
       </div>
@@ -59,7 +65,12 @@ const ageText = () => {
       <div className="flex gap-4 justify-between flex-wrap">
         <div className="w-[40%] min-w-max">
           <Text>
-            <strong>Καπνιστής:</strong> {smoker==="smoker" ? "Yes" : smoker==="non_smoker"? "No": "Ex Smoker"}
+            <strong>Καπνιστής:</strong>{" "}
+            {smoker === "smoker"
+              ? "Yes"
+              : smoker === "non_smoker"
+              ? "No"
+              : "Ex Smoker"}
           </Text>
         </div>
         <div className="w-[40%] min-w-max">

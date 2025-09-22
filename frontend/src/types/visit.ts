@@ -5,7 +5,7 @@ export type VisitInput = {
   comments: string;
   reason: string;
   examination: string;
-  control: string;        
+  control: string;
   medicines: IdRef[];
   symptoms: IdRef[];
 };

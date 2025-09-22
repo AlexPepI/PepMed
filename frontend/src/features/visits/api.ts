@@ -1,5 +1,9 @@
-import { api } from '../../lib/api';
-import type { CreateVisitPayload, VisitInput,VisitDetail } from '../../types/visit';
+import { api } from "../../lib/api";
+import type {
+  CreateVisitPayload,
+  VisitInput,
+  VisitDetail,
+} from "../../types/visit";
 
 export function buildCreateVisitPayload(v: VisitInput): CreateVisitPayload {
   const trim = (s: string) => s.trim();
@@ -9,15 +13,18 @@ export function buildCreateVisitPayload(v: VisitInput): CreateVisitPayload {
       comments: trim(v.comments),
       reason: trim(v.reason),
       examination: trim(v.examination),
-      control: v.control && v.control.trim() !== '' ? trim(v.control) : null,
+      control: v.control && v.control.trim() !== "" ? trim(v.control) : null,
     },
-    symptoms: v.symptoms.map(x => ({ id: Number(x.id) })),
-    medicines: v.medicines.map(x => ({ id: Number(x.id) })),
+    symptoms: v.symptoms.map((x) => ({ id: Number(x.id) })),
+    medicines: v.medicines.map((x) => ({ id: Number(x.id) })),
   };
 }
 
-export async function createVisit(visitorId: number, payload: CreateVisitPayload) {
-  const { data } = await api.post('/visit/', payload, {
+export async function createVisit(
+  visitorId: number,
+  payload: CreateVisitPayload
+) {
+  const { data } = await api.post("/visit/", payload, {
     params: { visitor_id: visitorId },
   });
   return data;
@@ -29,14 +36,15 @@ export async function getVisitById(id: number): Promise<VisitDetail> {
 }
 
 export async function getFileBlob(fileId: number): Promise<Blob> {
-  const { data } = await api.get(`/api/files/${fileId}`, { responseType: "blob" });
+  const { data } = await api.get(`/api/files/${fileId}`, {
+    responseType: "blob",
+  });
   return data as Blob;
 }
 
 export async function deleteFile(fileId: number): Promise<void> {
   await api.delete(`/api/files/${fileId}`);
 }
-
 
 const nullIfEmpty = (s: string | null | undefined) =>
   s && s.trim() !== "" ? s.trim() : null;
@@ -69,5 +77,5 @@ export async function updateVisit(id: number, data: VisitInput) {
 
 export const exportVisitPdf = (visitId: number) =>
   api.get(`/files/export-pdf/${visitId}`, {
-    responseType: 'blob',
+    responseType: "blob",
   });

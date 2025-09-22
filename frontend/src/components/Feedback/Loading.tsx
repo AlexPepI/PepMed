@@ -1,12 +1,11 @@
-import { Loader } from '@mantine/core';
+import { Loader } from "@mantine/core";
 
 function Loading() {
-  
-  return(
+  return (
     <div className="w-full h-[80vh] items-center flex justify-center py-10">
       <Loader size={35} />
     </div>
-  )
+  );
 }
 
-export default Loading
+export default Loading;

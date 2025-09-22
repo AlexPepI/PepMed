@@ -8,7 +8,14 @@ const SymptomsList = ({ symptoms }: Props) => {
   if (!symptoms?.length) return null;
   return (
     <div className="flex justify-center">
-      <Paper className="w-[100%] md:w-[70%]" radius="md" p="md" withBorder shadow="md" bg="dark.7">
+      <Paper
+        className="w-[100%] md:w-[70%]"
+        radius="md"
+        p="md"
+        withBorder
+        shadow="md"
+        bg="dark.7"
+      >
         <div className="flex gap-2">
           <Title order={5}>Συμπτώματα:</Title>
           <div className="flex flex-wrap gap-1">

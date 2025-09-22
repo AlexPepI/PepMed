@@ -1,7 +1,10 @@
 import { Divider, List } from "@mantine/core";
 
 type Disease = { id: number; name: string };
-type MedicineLink = { medicine: { id: number; name: string }; until: string | null };
+type MedicineLink = {
+  medicine: { id: number; name: string };
+  until: string | null;
+};
 
 type Props = {
   medicines: MedicineLink[];

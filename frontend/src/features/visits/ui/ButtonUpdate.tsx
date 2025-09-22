@@ -12,14 +12,14 @@ export default function UpdateVisitButton({ visit, visitor }: Props) {
 
   return (
     <Button
-        onClick={() =>
-            navigate(`/visit-update/${visit.id}`, {
-            state: {
-                ...visit,
-                name: visitor.name,
-                surname: visitor.surname,
-                amka: visitor.amka,
-            },
+      onClick={() =>
+        navigate(`/visit-update/${visit.id}`, {
+          state: {
+            ...visit,
+            name: visitor.name,
+            surname: visitor.surname,
+            amka: visitor.amka,
+          },
         })
       }
     >

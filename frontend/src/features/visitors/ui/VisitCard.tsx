@@ -28,11 +28,21 @@ const VisitorVisitsCard = ({ visits, maxHeight, user }: Props) => {
       withBorder
     >
       <div className="flex justify-center">
-        <ScrollArea.Autosize className="flex-1" h={maxHeight} type="scroll" offsetScrollbars>
+        <ScrollArea.Autosize
+          className="flex-1"
+          h={maxHeight}
+          type="scroll"
+          offsetScrollbars
+        >
           <div className="grid gap-4 w-[90%] items-stretch grid-cols-[repeat(auto-fill,minmax(200px,1fr))]">
             {visits.map((v) => (
               <div key={v.id ?? Math.random()}>
-                <PaperComponentVisit id={v.id} diagnosis={v.diagnosis} created_at={v.created_at} user={user} />
+                <PaperComponentVisit
+                  id={v.id}
+                  diagnosis={v.diagnosis}
+                  created_at={v.created_at}
+                  user={user}
+                />
               </div>
             ))}
           </div>

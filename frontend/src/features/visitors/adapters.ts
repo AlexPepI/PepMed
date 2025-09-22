@@ -31,30 +31,35 @@ const toApiDate = (d: unknown): string => {
 };
 const toNum = (v: string | number | null | undefined) => (v ? Number(v) : 0);
 
-const toSmoker = (s: string) : "smoker" | "non_smoker" | "ex_smoker" =>
+const toSmoker = (s: string): "smoker" | "non_smoker" | "ex_smoker" =>
   s === "smoker" ? "smoker" : s === "non_smoker" ? "non_smoker" : "ex_smoker";
 
 const toGender = (g: string): "male" | "female" | "other" =>
   g === "male" ? "male" : g === "female" ? "female" : "other";
 
-export function buildCreateVisitorPayload(v: VisitorInput): CreateVisitorRequest {
+export function buildCreateVisitorPayload(
+  v: VisitorInput
+): CreateVisitorRequest {
   return {
     visitor: {
-        name: v.name.trim(),
-        surname: v.surname.trim(),
-        birth_date: toApiDate(v.birth_date),
-        gender: toGender(v.gender),
-        amka: nullIfEmpty(v.amka),
-        weight: toNum(v.weight as any),
-        height: toNum(v.height as any),
-        smoker: toSmoker(v.smoker as any),
-        years_smoking: toNum(v.years_smoking as any),
-        cig_per_day: toNum(v.cig_per_day as any),
-        email: nullIfEmpty(v.email),
-        phone_number: nullIfEmpty(v.phoneNumber),
-        history: nullIfEmpty(v.history),
+      name: v.name.trim(),
+      surname: v.surname.trim(),
+      birth_date: toApiDate(v.birth_date),
+      gender: toGender(v.gender),
+      amka: nullIfEmpty(v.amka),
+      weight: toNum(v.weight as any),
+      height: toNum(v.height as any),
+      smoker: toSmoker(v.smoker as any),
+      years_smoking: toNum(v.years_smoking as any),
+      cig_per_day: toNum(v.cig_per_day as any),
+      email: nullIfEmpty(v.email),
+      phone_number: nullIfEmpty(v.phoneNumber),
+      history: nullIfEmpty(v.history),
     },
-    medicines: (v.medicines ?? []).map(({ id }) => ({ id: Number(id), until: null })),
+    medicines: (v.medicines ?? []).map(({ id }) => ({
+      id: Number(id),
+      until: null,
+    })),
     diseases: (v.diseases ?? []).map(({ id }) => ({ id: Number(id) })),
   };
 }

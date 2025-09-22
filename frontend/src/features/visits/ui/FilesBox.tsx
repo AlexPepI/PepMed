@@ -42,7 +42,12 @@ export default function FilesBox({ files, setFiles }: Props) {
   };
 
   return (
-    <Dropzone multiple className="w-[80%] md:w-[75%] md:min-w-[400px]" onDrop={add} accept={["image/*", "application/pdf"]}>
+    <Dropzone
+      multiple
+      className="w-[80%] md:w-[75%] md:min-w-[400px]"
+      onDrop={add}
+      accept={["image/*", "application/pdf"]}
+    >
       {files.length === 0 ? (
         <Group justify="center" mih={120} style={{ pointerEvents: "none" }}>
           <IconUpload />
@@ -66,7 +71,11 @@ export default function FilesBox({ files, setFiles }: Props) {
               }}
             >
               {f.file.type.startsWith("image/") ? (
-                <img src={f.url} alt={f.file.name} style={{ maxWidth: "100%", maxHeight: "100%" }} />
+                <img
+                  src={f.url}
+                  alt={f.file.name}
+                  style={{ maxWidth: "100%", maxHeight: "100%" }}
+                />
               ) : (
                 <Text ta="center" fz="xs" px="xs">
                   {f.file.name}
@@ -76,7 +85,10 @@ export default function FilesBox({ files, setFiles }: Props) {
                 variant="filled"
                 color="red"
                 size="sm"
-                onClick={(e) => { e.stopPropagation(); remove(f.id); }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  remove(f.id);
+                }}
                 style={{ position: "absolute", top: 6, right: 6 }}
               >
                 <IconX size={14} />

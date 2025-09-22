@@ -1,6 +1,6 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteConstant, type RefEntity } from '../api';
-import { constantsQK } from '../queryKeys';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteConstant, type RefEntity } from "../api";
+import { constantsQK } from "../queryKeys";
 
 export function useDelete(entity: RefEntity) {
   const qc = useQueryClient();
@@ -11,6 +11,4 @@ export function useDelete(entity: RefEntity) {
       qc.invalidateQueries({ queryKey: constantsQK.list(entity) });
     },
   });
-
-  
 }

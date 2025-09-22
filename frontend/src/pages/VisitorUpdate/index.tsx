@@ -1,6 +1,6 @@
 import { Stepper } from "@mantine/core";
 import { useState } from "react";
-import { useParams, useLocation,useNavigate } from "react-router";
+import { useParams, useLocation, useNavigate } from "react-router";
 import { buildNewVisitorForm } from "../../features/visitors/form";
 import FormCard from "../../features/visitors/ui/FormCard";
 import HistoryCard from "../../features/visitors/ui/HistoryCard";
@@ -19,11 +19,11 @@ const VisitorUpdate = () => {
   const { update, isLoading, error } = useUpdateVisitor(Number(id));
   const form = buildNewVisitorForm(location.state);
 
-  const handleSubmit = async (values:VisitorInput) => {
-    console.log(values)
-    await update(values)
-    navigate(`/visitor-details/${id}`)
-  }
+  const handleSubmit = async (values: VisitorInput) => {
+    console.log(values);
+    await update(values);
+    navigate(`/visitor-details/${id}`);
+  };
 
   return (
     <div className="flex justify-center mt-[5vh]">
@@ -33,10 +33,16 @@ const VisitorUpdate = () => {
         className="w-[80%]"
         allowNextStepsSelect={false}
       >
-        <Stepper.Step label="Στοιχεία Επισκέπτη" description="Επεξεργασία στοιχείων">
+        <Stepper.Step
+          label="Στοιχεία Επισκέπτη"
+          description="Επεξεργασία στοιχείων"
+        >
           <FormCard nextStep={nextStep} form={form} type="update" />
         </Stepper.Step>
-        <Stepper.Step label="Ιστορικό" description="Επεξεργασία ιατρικού ιστορικού">
+        <Stepper.Step
+          label="Ιστορικό"
+          description="Επεξεργασία ιατρικού ιστορικού"
+        >
           <HistoryCard
             onBack={prevStep}
             form={form}

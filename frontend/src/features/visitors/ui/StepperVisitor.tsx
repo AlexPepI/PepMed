@@ -14,7 +14,7 @@ type Props = {
   add: (payload: VisitorInput) => Promise<any>;
   isLoading: boolean;
   error: unknown;
-  setOverlay:(n: boolean) => void;
+  setOverlay: (n: boolean) => void;
 };
 
 export const StepperVisitor = ({
@@ -26,14 +26,13 @@ export const StepperVisitor = ({
   add,
   isLoading,
   error,
-  setOverlay
+  setOverlay,
 }: Props) => {
-  
   const navigate = useNavigate();
-  
+
   const handleSubmit = async (values: VisitorInput) => {
     try {
-      setOverlay(true)
+      setOverlay(true);
       const created = await add(values);
       const newId: number | undefined =
         created?.id ?? created?.data?.id ?? created?.visitor?.id;
@@ -44,13 +43,17 @@ export const StepperVisitor = ({
         });
       }
     } catch {
-      setOverlay(false)
+      setOverlay(false);
     }
   };
 
-  
-  return(
-    <Stepper active={active} onStepClick={setActive} className="w-[80%]" allowNextStepsSelect={false}>
+  return (
+    <Stepper
+      active={active}
+      onStepClick={setActive}
+      className="w-[80%]"
+      allowNextStepsSelect={false}
+    >
       <Stepper.Step label="Visitors Data" description="Add Data">
         <FormCard form={form} nextStep={nextStep} type="create" />
       </Stepper.Step>
@@ -65,5 +68,5 @@ export const StepperVisitor = ({
         />
       </Stepper.Step>
     </Stepper>
-  )
+  );
 };

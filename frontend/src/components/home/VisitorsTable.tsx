@@ -1,8 +1,8 @@
-import { Table, Button } from '@mantine/core';
-import { IconPlus } from '@tabler/icons-react';
-import { useNavigate } from 'react-router';
-import { useCallback } from 'react';
-import type { Visitor } from '../../types/visitor';
+import { Table, Button } from "@mantine/core";
+import { IconPlus } from "@tabler/icons-react";
+import { useNavigate } from "react-router";
+import { useCallback } from "react";
+import type { Visitor } from "../../types/visitor";
 
 type Props = {
   visitors: Visitor[];
@@ -16,17 +16,39 @@ const VisitorTable = ({ visitors, hasMore, loading, onLoadMore }: Props) => {
 
   const rows = visitors.map((v) => (
     <Table.Tr key={v.id} className="cursor-pointer">
-      <Table.Td onClick={() => navigate(`/visitor-details/${v.id}`)} style={{ textAlign: 'center' }}>
+      <Table.Td
+        onClick={() => navigate(`/visitor-details/${v.id}`)}
+        style={{ textAlign: "center" }}
+      >
         {v.name} {v.surname}
       </Table.Td>
-      <Table.Td onClick={() => navigate(`/visitor-details/${v.id}`)} style={{ textAlign: 'center' }}>
-        {v.amka? v.amka : "-"}
+      <Table.Td
+        onClick={() => navigate(`/visitor-details/${v.id}`)}
+        style={{ textAlign: "center" }}
+      >
+        {v.amka ? v.amka : "-"}
       </Table.Td>
-      <Table.Td onClick={() => navigate(`/visitor-details/${v.id}`)} style={{ textAlign: 'center' }}>
-        {v.latest_visit ? new Date(v.latest_visit).toLocaleString('el-GR') : '-'}
+      <Table.Td
+        onClick={() => navigate(`/visitor-details/${v.id}`)}
+        style={{ textAlign: "center" }}
+      >
+        {v.latest_visit
+          ? new Date(v.latest_visit).toLocaleString("el-GR")
+          : "-"}
       </Table.Td>
       <Table.Td className="flex items-center justify-center">
-        <Button p={6} radius="xl" size="xs"   onClick={() => navigate(`/new-visit/${v.id}`, {state: { visitor: { id: v.id, name: v.name, surname: v.surname } }})}>
+        <Button
+          p={6}
+          radius="xl"
+          size="xs"
+          onClick={() =>
+            navigate(`/new-visit/${v.id}`, {
+              state: {
+                visitor: { id: v.id, name: v.name, surname: v.surname },
+              },
+            })
+          }
+        >
           <IconPlus size={16} />
         </Button>
       </Table.Td>
@@ -38,7 +60,8 @@ const VisitorTable = ({ visitors, hasMore, loading, onLoadMore }: Props) => {
       if (loading || !hasMore) return;
       const el = e.currentTarget;
       const threshold = 80;
-      const reachedBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - threshold;
+      const reachedBottom =
+        el.scrollTop + el.clientHeight >= el.scrollHeight - threshold;
       if (reachedBottom) onLoadMore();
     },
     [loading, hasMore, onLoadMore]
@@ -57,24 +80,28 @@ const VisitorTable = ({ visitors, hasMore, loading, onLoadMore }: Props) => {
           <Table stickyHeader striped highlightOnHover withTableBorder>
             <Table.Thead>
               <Table.Tr>
-                <Table.Th style={{ textAlign: 'center' }}>Ονοματεπώνυμο</Table.Th>
-                <Table.Th style={{ textAlign: 'center' }}>Α.Μ.Κ.Α</Table.Th>
-                <Table.Th style={{ textAlign: 'center' }}>Τελευταία Επίσκεψη</Table.Th>
-                <Table.Th style={{ textAlign: 'center' }}>Επίσκεψη</Table.Th>
+                <Table.Th style={{ textAlign: "center" }}>
+                  Ονοματεπώνυμο
+                </Table.Th>
+                <Table.Th style={{ textAlign: "center" }}>Α.Μ.Κ.Α</Table.Th>
+                <Table.Th style={{ textAlign: "center" }}>
+                  Τελευταία Επίσκεψη
+                </Table.Th>
+                <Table.Th style={{ textAlign: "center" }}>Επίσκεψη</Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>
               {rows}
               {loading && (
                 <Table.Tr>
-                  <Table.Td colSpan={4} style={{ textAlign: 'center' }}>
+                  <Table.Td colSpan={4} style={{ textAlign: "center" }}>
                     Φόρτωση…
                   </Table.Td>
                 </Table.Tr>
               )}
               {!loading && visitors.length === 0 && (
                 <Table.Tr>
-                  <Table.Td colSpan={4} style={{ textAlign: 'center' }}>
+                  <Table.Td colSpan={4} style={{ textAlign: "center" }}>
                     Δεν βρέθηκαν αποτελέσματα
                   </Table.Td>
                 </Table.Tr>

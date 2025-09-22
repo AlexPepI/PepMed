@@ -1,7 +1,7 @@
-import {api} from "../../lib/api";
+import { api } from "../../lib/api";
 import type { VisitorInput } from "../../types/visitor";
 import { buildCreateVisitorPayload } from "./adapters";
-import type { VisitorsHomePage,Visitor } from "../../types/visitor";
+import type { VisitorsHomePage, Visitor } from "../../types/visitor";
 
 export async function createVisitor(input: VisitorInput) {
   const payload = buildCreateVisitorPayload(input);
@@ -10,22 +10,25 @@ export async function createVisitor(input: VisitorInput) {
 }
 
 export async function getVisitors(params: { cursor: number }) {
-  const res = await api.get<VisitorsHomePage>('/api/visitor/all', {
+  const res = await api.get<VisitorsHomePage>("/api/visitor/all", {
     params: { cursor: params.cursor },
   });
   return res.data;
 }
 
 export async function searchVisitors(params: { q: string }) {
-  const res = await api.get<Visitor[]>('/api/visitor/search', {
+  const res = await api.get<Visitor[]>("/api/visitor/search", {
     params: { search_term: params.q },
   });
   return res.data;
 }
 
-export type GetVisitorByIdResponse = import("../../types/visitor").VisitorDetail;
+export type GetVisitorByIdResponse =
+  import("../../types/visitor").VisitorDetail;
 
-export async function getVisitorById(id: number): Promise<GetVisitorByIdResponse> {
+export async function getVisitorById(
+  id: number
+): Promise<GetVisitorByIdResponse> {
   const { data } = await api.get(`/api/visitor/${id}`);
   return data as GetVisitorByIdResponse;
 }

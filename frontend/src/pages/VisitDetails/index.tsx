@@ -2,7 +2,10 @@ import { Title, Divider, Loader, Center, Card, Text } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { useLocation, useParams } from "react-router";
 import { useMemo } from "react";
-import { useVisitDetails, getVisitDetailsError } from "../../features/visits/hooks/useVisitDetails";
+import {
+  useVisitDetails,
+  getVisitDetailsError,
+} from "../../features/visits/hooks/useVisitDetails";
 import VisitDetailsCard from "../../features/visits/ui/DetailsCard";
 import FileViewer from "../../features/visits/ui/FileViewer";
 import FileUploadModal from "../../features/visits/ui/FileUploadModal";
@@ -22,9 +25,9 @@ const VisitDetailsPage = () => {
 
   if (isPending) {
     return (
-        <Center mih="60vh">
-          <Loader />
-        </Center>
+      <Center mih="60vh">
+        <Loader />
+      </Center>
     );
   }
 
@@ -75,23 +78,28 @@ const VisitDetailsPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-[90%]">
             <Card shadow="sm" padding="lg" radius="md" withBorder>
               <VisitDetailsCard visit={data} />
-              <UpdateVisitButton visitor={visitor} visit={data}/>
+              <UpdateVisitButton visitor={visitor} visit={data} />
             </Card>
             <Card shadow="sm" padding="lg" radius="md" withBorder>
               <FileViewer visit={data} />
               <div className="flex justify-end mb-3">
                 <FileUploadModal visitId={data.id} />
-                <ExportPdfButton visitId={Number(visitId)}/>
+                <ExportPdfButton visitId={Number(visitId)} />
               </div>
             </Card>
           </div>
         ) : (
-          <Card className="w-full md:w-[60%]" shadow="sm" padding="lg" radius="md" withBorder>
-
+          <Card
+            className="w-full md:w-[60%]"
+            shadow="sm"
+            padding="lg"
+            radius="md"
+            withBorder
+          >
             <VisitDetailsCard visit={data} />
             <div className="flex justify-end mb-3">
               <FileUploadModal visitId={data.id} />
-              <UpdateVisitButton visitor={visitor} visit={data}/>
+              <UpdateVisitButton visitor={visitor} visit={data} />
             </div>
           </Card>
         )}

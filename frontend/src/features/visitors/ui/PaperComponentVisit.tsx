@@ -13,7 +13,9 @@ type Props = {
 };
 
 const PaperComponentVisit = ({ id, diagnosis, created_at, user }: Props) => {
-  const createdText = created_at ? new Date(created_at).toLocaleString("el-GR") : "—";
+  const createdText = created_at
+    ? new Date(created_at).toLocaleString("el-GR")
+    : "—";
   const navigate = useNavigate();
 
   return (

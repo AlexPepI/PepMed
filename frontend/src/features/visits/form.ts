@@ -1,25 +1,25 @@
-import { useForm, isNotEmpty } from '@mantine/form';
-import type { VisitInput } from '../../types/visit';
+import { useForm, isNotEmpty } from "@mantine/form";
+import type { VisitInput } from "../../types/visit";
 
 export const newVisitInitialValues: VisitInput = {
-  diagnosis: '',
-  comments: '',
-  reason: '',
-  examination: '',
-  control: '',
+  diagnosis: "",
+  comments: "",
+  reason: "",
+  examination: "",
+  control: "",
   medicines: [],
   symptoms: [],
 };
 
 export function buildNewVisitForm(initial: Partial<VisitInput> = {}) {
   return useForm<VisitInput>({
-    mode: 'controlled',
+    mode: "controlled",
     initialValues: { ...newVisitInitialValues, ...initial },
     validate: {
-      diagnosis: isNotEmpty('Πρέπει να συμπληρωθεί!'),
-      comments: isNotEmpty('Πρέπει να συμπληρωθεί!'),
-      reason: isNotEmpty('Πρέπει να συμπληρωθεί!'),
-      examination: isNotEmpty('Πρέπει να συμπληρωθεί!'),
+      diagnosis: isNotEmpty("Πρέπει να συμπληρωθεί!"),
+      comments: isNotEmpty("Πρέπει να συμπληρωθεί!"),
+      reason: isNotEmpty("Πρέπει να συμπληρωθεί!"),
+      examination: isNotEmpty("Πρέπει να συμπληρωθεί!"),
     },
   });
 }

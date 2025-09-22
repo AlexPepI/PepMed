@@ -1,6 +1,6 @@
-import { useMutation } from '@tanstack/react-query';
-import type { VisitInput } from '../../../types/visit';
-import { buildCreateVisitPayload, createVisit } from '../api';
+import { useMutation } from "@tanstack/react-query";
+import type { VisitInput } from "../../../types/visit";
+import { buildCreateVisitPayload, createVisit } from "../api";
 
 type Vars = { visitorId: number; input: VisitInput };
 

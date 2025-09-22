@@ -1,6 +1,6 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { addConstant, type RefEntity } from '../api';
-import { constantsQK } from '../queryKeys';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { addConstant, type RefEntity } from "../api";
+import { constantsQK } from "../queryKeys";
 
 export function useAddConstant(entity: RefEntity) {
   const qc = useQueryClient();

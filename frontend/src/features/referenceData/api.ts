@@ -1,12 +1,12 @@
-import { api } from '../../lib/api.ts';
+import { api } from "../../lib/api.ts";
 
-export type RefEntity = 'medicine' | 'disease' | 'symptom';
+export type RefEntity = "medicine" | "disease" | "symptom";
 export type RefItem = { id: string | number; name: string };
 
 const endpoints: Record<RefEntity, string> = {
-  medicine: '/medicine',
-  disease: '/disease',
-  symptom: '/symptom',
+  medicine: "/medicine",
+  disease: "/disease",
+  symptom: "/symptom",
 };
 
 export async function fetchConstant(entity: RefEntity): Promise<RefItem[]> {
@@ -14,11 +14,11 @@ export async function fetchConstant(entity: RefEntity): Promise<RefItem[]> {
   return data;
 }
 
-export async function addConstant(entity:RefEntity,name:string){
-  const {data} = await api.post(`${endpoints[entity]}/`,{name})
+export async function addConstant(entity: RefEntity, name: string) {
+  const { data } = await api.post(`${endpoints[entity]}/`, { name });
   return data;
 }
 
 export async function deleteConstant(entity: RefEntity, id: number) {
-  await api.delete(`${endpoints[entity]}/`,{data: { id }});
+  await api.delete(`${endpoints[entity]}/`, { data: { id } });
 }

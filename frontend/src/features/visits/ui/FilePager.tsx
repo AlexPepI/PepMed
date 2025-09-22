@@ -27,7 +27,13 @@ const FilePager = ({
       <Button disabled={disablePrev} radius="xl" size="sm" onClick={onPrev}>
         <IconArrowNarrowLeft size={16} />
       </Button>
-      <Button ml="sm" disabled={disableNext} radius="xl" size="sm" onClick={onNext}>
+      <Button
+        ml="sm"
+        disabled={disableNext}
+        radius="xl"
+        size="sm"
+        onClick={onNext}
+      >
         <IconArrowNarrowRight size={16} />
       </Button>
       <Text ml="md" span>

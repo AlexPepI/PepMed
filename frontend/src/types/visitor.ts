@@ -37,7 +37,10 @@ export type VisitSummary = {
 };
 
 export type DiseaseRef = { id: number; name: string };
-export type MedicineLink = { medicine: { id: number; name: string }; until: string | null };
+export type MedicineLink = {
+  medicine: { id: number; name: string };
+  until: string | null;
+};
 
 export interface VisitorDetail {
   id: number | null;

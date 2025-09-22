@@ -1,9 +1,11 @@
-
 import { Title, Divider, Loader, Center } from "@mantine/core";
 import { useMediaQuery, useElementSize } from "@mantine/hooks";
 import { useParams } from "react-router";
 import { useMemo } from "react";
-import { useVisitorDetails, getVisitorDetailsError } from "../../features/visitors/hooks/useVisitorDetails";
+import {
+  useVisitorDetails,
+  getVisitorDetailsError,
+} from "../../features/visitors/hooks/useVisitorDetails";
 import CardDetails from "../../features/visitors/ui/CardDetails";
 import VisitsCard from "../../features/visitors/ui/VisitCard";
 
@@ -18,9 +20,9 @@ const VisitorDetailsPage = () => {
 
   if (isPending) {
     return (
-        <Center mih="60vh">
-          <Loader />
-        </Center>
+      <Center mih="60vh">
+        <Loader />
+      </Center>
     );
   }
 
@@ -69,9 +71,13 @@ const VisitorDetailsPage = () => {
           <div className="mt-5 flex w-[100%] md:w-[55%]">
             {!!data.visits?.length && (
               <VisitsCard
-                maxHeight={height || 400} 
+                maxHeight={height || 400}
                 visits={data.visits}
-                user={{ name: data.name, surname: data.surname, amka: data.amka }}
+                user={{
+                  name: data.name,
+                  surname: data.surname,
+                  amka: data.amka,
+                }}
               />
             )}
           </div>

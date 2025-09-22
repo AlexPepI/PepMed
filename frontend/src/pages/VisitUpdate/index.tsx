@@ -1,5 +1,5 @@
 import { useLocation, useNavigate, useParams } from "react-router";
-import { useForm,isNotEmpty } from "@mantine/form";
+import { useForm, isNotEmpty } from "@mantine/form";
 import FormCard from "../../features/visits/ui/FormCard";
 import { useUpdateVisit } from "../../features/visits/hooks/useUpdateVisits";
 import type { VisitInput } from "../../types/visit";
@@ -27,15 +27,16 @@ export default function VisitUpdate() {
     symptoms: (s?.symptoms ?? []).map(({ id }) => ({ id: Number(id) })),
   };
 
-  const form = useForm<VisitInput>({ 
-    mode: "controlled", 
+  const form = useForm<VisitInput>({
+    mode: "controlled",
     initialValues: initial,
     validate: {
-      diagnosis: isNotEmpty('Πρέπει να συμπληρωθεί!'),
-      comments: isNotEmpty('Πρέπει να συμπληρωθεί!'),
-      reason: isNotEmpty('Πρέπει να συμπληρωθεί!'),
-      examination: isNotEmpty('Πρέπει να συμπληρωθεί!'),
-      }});
+      diagnosis: isNotEmpty("Πρέπει να συμπληρωθεί!"),
+      comments: isNotEmpty("Πρέπει να συμπληρωθεί!"),
+      reason: isNotEmpty("Πρέπει να συμπληρωθεί!"),
+      examination: isNotEmpty("Πρέπει να συμπληρωθεί!"),
+    },
+  });
   const { update, isLoading, error } = useUpdateVisit(Number(id));
 
   const handleSubmit = async (values: VisitInput) => {
