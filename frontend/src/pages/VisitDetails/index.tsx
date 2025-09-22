@@ -1,4 +1,4 @@
-import { Title, Divider, Loader, Center, Card, Text } from "@mantine/core";
+import { Title, Divider, Center, Card, Text } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { useLocation, useParams } from "react-router";
 import { useMemo } from "react";
@@ -11,6 +11,7 @@ import FileViewer from "../../features/visits/ui/FileViewer";
 import FileUploadModal from "../../features/visits/ui/FileUploadModal";
 import UpdateVisitButton from "../../features/visits/ui/ButtonUpdate";
 import ExportPdfButton from "../../features/visits/ui/ExportPdfButton";
+import Loading from "../../components/Feedback/Loading";
 
 type HeaderState = { name: string; surname: string; amka: string };
 
@@ -24,11 +25,7 @@ const VisitDetailsPage = () => {
   const { data, isPending, error } = useVisitDetails(visitId);
 
   if (isPending) {
-    return (
-      <Center mih="60vh">
-        <Loader />
-      </Center>
-    );
+    return <Loading />;
   }
 
   if (error) {

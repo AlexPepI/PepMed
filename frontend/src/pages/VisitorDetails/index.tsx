@@ -1,4 +1,4 @@
-import { Title, Divider, Loader, Center } from "@mantine/core";
+import { Title, Divider, Center } from "@mantine/core";
 import { useMediaQuery, useElementSize } from "@mantine/hooks";
 import { useParams } from "react-router";
 import { useMemo } from "react";
@@ -8,6 +8,7 @@ import {
 } from "../../features/visitors/hooks/useVisitorDetails";
 import CardDetails from "../../features/visitors/ui/CardDetails";
 import VisitsCard from "../../features/visitors/ui/VisitCard";
+import Loading from "../../components/Feedback/Loading";
 
 const VisitorDetailsPage = () => {
   const { id } = useParams();
@@ -19,11 +20,7 @@ const VisitorDetailsPage = () => {
   const { data, isPending, error } = useVisitorDetails(visitorId);
 
   if (isPending) {
-    return (
-      <Center mih="60vh">
-        <Loader />
-      </Center>
-    );
+    return <Loading />;
   }
 
   if (error) {

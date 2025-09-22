@@ -2,16 +2,16 @@ import { TextInput, Button } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 
 type Props = {
-  value: string; // typing value (local to Home)
-  onChange: (v: string) => void; // update typing value
-  onSubmit: () => void; // commit search
+  value: string; 
+  onChange: (v: string) => void; 
+  onSubmit: () => void; 
   isSearching?: boolean;
 };
 
 const SearchVisitor = ({ value, onChange, onSubmit, isSearching }: Props) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(); // only here we commit search
+    onSubmit(); 
   };
 
   return (
@@ -21,7 +21,7 @@ const SearchVisitor = ({ value, onChange, onSubmit, isSearching }: Props) => {
     >
       <TextInput
         radius="xl"
-        placeholder="Αναζήτηση επισκέπτη"
+        placeholder="Search visitor"
         leftSectionPointerEvents="none"
         leftSection={<IconSearch size={16} />}
         value={value}
@@ -34,7 +34,7 @@ const SearchVisitor = ({ value, onChange, onSubmit, isSearching }: Props) => {
         className="size-sm"
         loading={isSearching}
       >
-        Αναζήτηση
+        Search
       </Button>
     </form>
   );

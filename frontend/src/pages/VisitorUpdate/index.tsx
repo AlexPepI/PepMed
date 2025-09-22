@@ -1,11 +1,11 @@
-import { Stepper } from "@mantine/core";
+import { StepperVisitor } from "../../features/visitors/ui/StepperVisitor";
 import { useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router";
 import { buildNewVisitorForm } from "../../features/visitors/form";
-import FormCard from "../../features/visitors/ui/FormCard";
-import HistoryCard from "../../features/visitors/ui/HistoryCard";
 import { useUpdateVisitor } from "../../features/visitors/hooks/useUpdateVisitor";
 import type { VisitorInput } from "../../types/visitor";
+import BlockingOverlay from "../../components/Feedback/BlockingOverlay";
+import type { MedicineLink } from "../../types/visitor";
 
 const VisitorUpdate = () => {
   const [active, setActive] = useState(0);
@@ -16,43 +16,43 @@ const VisitorUpdate = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const newState = {
+    ...location.state,
+    medicines: (location.state.medicines_links as MedicineLink[]).map(
+      (link) => ({
+        name: link.medicine.name,
+        id: link.medicine.id,
+      })
+    ),
+  };
+
   const { update, isLoading, error } = useUpdateVisitor(Number(id));
-  const form = buildNewVisitorForm(location.state);
+  const form = buildNewVisitorForm(newState);
+  const [overlay, setOverlay] = useState(false);
 
   const handleSubmit = async (values: VisitorInput) => {
-    console.log(values);
-    await update(values);
-    navigate(`/visitor-details/${id}`);
+    try {
+      setOverlay(true);
+      await update(values);
+      navigate(`/visitor-details/${id}`);
+    } catch {
+      setOverlay(false);
+    }
   };
 
   return (
     <div className="flex justify-center mt-[5vh]">
-      <Stepper
+      <StepperVisitor
         active={active}
-        onStepClick={setActive}
-        className="w-[80%]"
-        allowNextStepsSelect={false}
-      >
-        <Stepper.Step
-          label="Στοιχεία Επισκέπτη"
-          description="Επεξεργασία στοιχείων"
-        >
-          <FormCard nextStep={nextStep} form={form} type="update" />
-        </Stepper.Step>
-        <Stepper.Step
-          label="Ιστορικό"
-          description="Επεξεργασία ιατρικού ιστορικού"
-        >
-          <HistoryCard
-            onBack={prevStep}
-            form={form}
-            onSubmit={handleSubmit}
-            submitting={isLoading}
-            error={error}
-            mode="update"
-          />
-        </Stepper.Step>
-      </Stepper>
+        setActive={setActive}
+        nextStep={nextStep}
+        prevStep={prevStep}
+        form={form}
+        handleSubmit={handleSubmit}
+        isLoading={isLoading}
+        error={error}
+      />
+      <BlockingOverlay visible={overlay} label="Creating visitor..." />
     </div>
   );
 };

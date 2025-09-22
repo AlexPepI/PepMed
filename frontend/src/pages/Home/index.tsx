@@ -52,7 +52,7 @@ const Home = () => {
           order={1}
           style={{ fontSize: smallerThanMd ? "1.5rem" : "2.5rem" }}
         >
-          Αναζήτηση επισκέπτη
+          Visitor Search
         </Title>
       </div>
 

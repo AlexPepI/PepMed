@@ -3,7 +3,6 @@ import type { VisitorForm } from "../form";
 import type { VisitorInput } from "../../../types/visitor";
 import FormCard from "./FormCard";
 import HistoryCard from "./HistoryCard";
-import { useNavigate } from "react-router";
 
 type Props = {
   active: number;
@@ -11,10 +10,9 @@ type Props = {
   nextStep: () => void;
   prevStep: () => void;
   form: VisitorForm;
-  add: (payload: VisitorInput) => Promise<any>;
+  handleSubmit: (payload: VisitorInput) => Promise<any>;
   isLoading: boolean;
   error: unknown;
-  setOverlay: (n: boolean) => void;
 };
 
 export const StepperVisitor = ({
@@ -23,29 +21,10 @@ export const StepperVisitor = ({
   nextStep,
   prevStep,
   form,
-  add,
+  handleSubmit,
   isLoading,
   error,
-  setOverlay,
 }: Props) => {
-  const navigate = useNavigate();
-
-  const handleSubmit = async (values: VisitorInput) => {
-    try {
-      setOverlay(true);
-      const created = await add(values);
-      const newId: number | undefined =
-        created?.id ?? created?.data?.id ?? created?.visitor?.id;
-
-      if (newId) {
-        navigate(`/new-visit/${newId}`, {
-          state: { visitor: { ...values, id: newId } },
-        });
-      }
-    } catch {
-      setOverlay(false);
-    }
-  };
 
   return (
     <Stepper

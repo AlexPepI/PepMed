@@ -21,7 +21,7 @@ export const newVisitorInitialValues: VisitorInput = {
 
 const normalize = (v: any) => (v == null ? "" : String(v));
 
-export const buildNewVisitorForm = (initial: VisitorInput) =>
+export const buildNewVisitorForm = (initial: VisitorInput ) =>
   useForm<VisitorInput>({
     mode: "controlled",
     initialValues: {

@@ -6,6 +6,8 @@ import {
   newVisitorInitialValues,
 } from "../../features/visitors/form";
 import BlockingOverlay from "../../components/Feedback/BlockingOverlay";
+import { useNavigate } from "react-router";
+import type { VisitorInput } from "../../types/visitor";
 
 const NewVisitor = () => {
   const form = buildNewVisitorForm(newVisitorInitialValues);
@@ -16,6 +18,25 @@ const NewVisitor = () => {
   const nextStep = () => setActive((c) => (c < 2 ? c + 1 : c));
   const prevStep = () => setActive((c) => (c > 0 ? c - 1 : c));
 
+  const navigate = useNavigate();
+
+  const handleSubmit = async (values: VisitorInput) => {
+    try {
+      setOverlay(true);
+      const created = await add(values);
+      const newId: number | undefined =
+        created?.id ?? created?.data?.id ?? created?.visitor?.id;
+
+      if (newId) {
+        navigate(`/new-visit/${newId}`, {
+          state: { visitor: { ...values, id: newId } },
+        });
+      }
+    } catch {
+      setOverlay(false);
+    }
+  };
+
   return (
     <div className="flex justify-center mt-[5vh]">
       <StepperVisitor
@@ -24,10 +45,9 @@ const NewVisitor = () => {
         nextStep={nextStep}
         prevStep={prevStep}
         form={form}
-        add={add}
+        handleSubmit={handleSubmit}
         isLoading={isLoading}
         error={error}
-        setOverlay={setOverlay}
       />
       <BlockingOverlay visible={overlay} label="Creating visitor..." />
     </div>

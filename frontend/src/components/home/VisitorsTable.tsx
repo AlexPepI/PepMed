@@ -81,13 +81,13 @@ const VisitorTable = ({ visitors, hasMore, loading, onLoadMore }: Props) => {
             <Table.Thead>
               <Table.Tr>
                 <Table.Th style={{ textAlign: "center" }}>
-                  Ονοματεπώνυμο
+                  Full Name
                 </Table.Th>
-                <Table.Th style={{ textAlign: "center" }}>Α.Μ.Κ.Α</Table.Th>
+                <Table.Th style={{ textAlign: "center" }}>Personal Number</Table.Th>
                 <Table.Th style={{ textAlign: "center" }}>
-                  Τελευταία Επίσκεψη
+                  Last Visit
                 </Table.Th>
-                <Table.Th style={{ textAlign: "center" }}>Επίσκεψη</Table.Th>
+                <Table.Th style={{ textAlign: "center" }}>Visit</Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>
@@ -95,14 +95,14 @@ const VisitorTable = ({ visitors, hasMore, loading, onLoadMore }: Props) => {
               {loading && (
                 <Table.Tr>
                   <Table.Td colSpan={4} style={{ textAlign: "center" }}>
-                    Φόρτωση…
+                    Loading...
                   </Table.Td>
                 </Table.Tr>
               )}
               {!loading && visitors.length === 0 && (
                 <Table.Tr>
                   <Table.Td colSpan={4} style={{ textAlign: "center" }}>
-                    Δεν βρέθηκαν αποτελέσματα
+                    No results found
                   </Table.Td>
                 </Table.Tr>
               )}

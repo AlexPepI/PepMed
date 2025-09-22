@@ -1,3 +1,5 @@
+
+
 export type VisitorInput = {
   name: string;
   surname: string;
@@ -12,7 +14,7 @@ export type VisitorInput = {
   email: string;
   phoneNumber: string;
   history: string;
-  medicines: any[];
+  medicines: MedicineLink[] | ConstantRef[];
   diseases: any[];
 };
 
@@ -36,9 +38,9 @@ export type VisitSummary = {
   created_at: string | null;
 };
 
-export type DiseaseRef = { id: number; name: string };
+export type ConstantRef = { id: number; name: string };
 export type MedicineLink = {
-  medicine: { id: number; name: string };
+  medicine: ConstantRef;
   until: string | null;
 };
 
@@ -57,7 +59,7 @@ export interface VisitorDetail {
   height: number | null;
   weight: number | null;
   history: string | null;
-  diseases: DiseaseRef[];
+  diseases: ConstantRef[];
   medicines_links: MedicineLink[];
   visits: VisitSummary[];
 }

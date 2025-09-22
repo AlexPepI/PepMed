@@ -1,9 +1,10 @@
-import { Table, Loader, Alert, CloseButton } from "@mantine/core";
+import { Table, Alert, CloseButton } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { fetchConstant, type RefEntity, type RefItem } from "../api.ts";
 import { useDelete } from "../hooks/useDelete";
 import { constantsQK } from "../queryKeys.ts";
 import ReferenceDataAddForm from "./ReferenceDataAddForm.tsx";
+import Loading from "../../../components/Feedback/Loading.tsx";
 
 type Props = { title: string; addTitle: string; entity: RefEntity };
 
@@ -22,7 +23,7 @@ export default function CatalogTable({ title, addTitle, entity }: Props) {
       <div className="w-[80%] m-auto mt-[1%] mb-[3%]">
         {isLoading && (
           <div className="flex justify-center py-6">
-            <Loader />
+            <Loading />
           </div>
         )}
 
