@@ -32,7 +32,7 @@ const toApiDate = (d: unknown): string => {
 const toNum = (v: string | number | null | undefined) => (v ? Number(v) : 0);
 
 const toSmoker = (s: string) : "smoker" | "non_smoker" | "ex_smoker" =>
-  s === "smoker" ? "smoker" : s === "non-smoker" ? "non_smoker" : "ex_smoker";
+  s === "smoker" ? "smoker" : s === "non_smoker" ? "non_smoker" : "ex_smoker";
 
 const toGender = (g: string): "male" | "female" | "other" =>
   g === "male" ? "male" : g === "female" ? "female" : "other";

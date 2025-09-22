@@ -20,7 +20,7 @@ const VisitorTable = ({ visitors, hasMore, loading, onLoadMore }: Props) => {
         {v.name} {v.surname}
       </Table.Td>
       <Table.Td onClick={() => navigate(`/visitor-details/${v.id}`)} style={{ textAlign: 'center' }}>
-        {v.amka}
+        {v.amka? v.amka : "-"}
       </Table.Td>
       <Table.Td onClick={() => navigate(`/visitor-details/${v.id}`)} style={{ textAlign: 'center' }}>
         {v.latest_visit ? new Date(v.latest_visit).toLocaleString('el-GR') : '-'}

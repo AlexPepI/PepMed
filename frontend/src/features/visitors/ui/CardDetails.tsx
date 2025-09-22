@@ -9,7 +9,6 @@ type Props = {
 };
 
 const VisitorCardDetails = ({ user }: Props) => {
-  console.log(user)
   const navigate = useNavigate();
 
   return (

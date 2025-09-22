@@ -52,7 +52,7 @@ def build_visit_payload(session, visit_id: int) -> dict:
         "visitor": {
             "name": v.name,
             "surname": v.surname,
-            "amka": v.amka,
+            "amka": v.amka if v.amka else "-",
             "gender": (
                 "Άνδρας" if getattr(v.gender, "value", v.gender) == "male"
                 else "Γυναίκα" if getattr(v.gender, "value", v.gender) == "female"
@@ -69,7 +69,7 @@ def build_visit_payload(session, visit_id: int) -> dict:
                 else "Μη καπνιστής" if getattr(v.smoker, "value", v.smoker) == "non_smoker"
                 else "Πρώην καπνιστής"
             ) if v.smoker else "-",
-            "packyears": _packyears(v.cig_per_day, v.years_smoking),
+            "packyears": _packyears(v.cig_per_day, v.years_smoking) or "-",
             "diseases_list": ", ".join(diseases) or "-",
             "medicines_list": ", ".join(visitor_meds) or "-",
             "history_notes": v.history,
@@ -79,7 +79,7 @@ def build_visit_payload(session, visit_id: int) -> dict:
             "reason": visit.reason,
             "symptoms_list": ", ".join(symptoms) or "-",
             "examination": visit.examination,
-            "lab_workup": visit.control,  
+            "lab_workup": visit.control if visit.control else "-",  
             "diagnosis": visit.diagnosis,
             "recommendations": visit.comments,  
             "medicines_list": ", ".join(visit_meds) or "-",

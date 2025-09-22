@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import { useNavigate } from 'react-router';
 import { AppShell, Burger, NavLink, Divider } from '@mantine/core';
 import { NAV_ITEMS } from '../../navigation/pages';
 import { IconDeviceDesktopUp } from '@tabler/icons-react';
@@ -8,7 +8,12 @@ type Props = { opened: boolean; toggle: () => void };
 
 export default function Sidebar({ opened, toggle }: Props) {
   
-  const handleNav = () => opened && toggle();
+  const navigate = useNavigate()
+
+  const handleNav = (path:string) => {
+    opened && toggle();
+    navigate(path)
+  }
 
   return (
     <AppShell.Navbar p="md" 
@@ -35,7 +40,7 @@ export default function Sidebar({ opened, toggle }: Props) {
       </AppShell.Section>
       <AppShell.Section grow>
         {NAV_ITEMS.map(({ path, label, icon: Icon }) => (
-          <NavLink key={path} component={Link} to={path} onClick={handleNav}
+          <NavLink key={path} onClick={()=>handleNav(path)}
                    label={label} leftSection={<Icon size={20} />}
                    style={{ borderRadius: 25, marginTop: 15, height: 48 }} />
         ))}

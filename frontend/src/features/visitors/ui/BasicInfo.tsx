@@ -39,6 +39,7 @@ const ageText = () => {
   }`;
 };
 
+
   return (
     <>
       <div className="flex gap-4 justify-between flex-wrap">

@@ -50,7 +50,7 @@ function HistoryCard({
             />
           </div>
 
-          {(form.values.smoker === "Smoker" || form.values.smoker === "Ex-smoker") && (
+          {(form.values.smoker === "smoker" || form.values.smoker === "ex_smoker") && (
             <div className="flex justify-center">
               <div className="w-[100%] md:w-[50%] flex flex-col items-center md:flex-row md:flex-wrap justify-around gap-3">
                 <TextInput
