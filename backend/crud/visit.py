@@ -14,7 +14,7 @@ def get_details_for_visit_id(id,db:Session) :
     if not visit:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Visitor with id: {id}, was not found!"
+            detail=f"Visit with id: {id}, was not found!"
         )
     files = [
         f

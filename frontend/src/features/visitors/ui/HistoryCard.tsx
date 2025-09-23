@@ -3,6 +3,8 @@ import type { VisitorForm } from "../form";
 import type { VisitorInput } from "../../../types/visitor";
 import MultiSelectConst from "../../referenceData/ui/MultiSelectReferenceData";
 import { getErrorMessage } from "../../../lib/errors";
+import type { MedicineLink, ConstantRef } from "../../../types/visitor";
+import type { IdRef } from "../../../types/visit";
 
 type Props = {
   form: VisitorForm;
@@ -22,6 +24,14 @@ function HistoryCard({
   error,
 }: Props) {
   const errMsg = error instanceof Error ? error : error ? String(error) : "";
+
+  const toIdRefs = (arr: MedicineLink[] | ConstantRef[] | undefined): IdRef[] =>
+    (arr ?? []).map((x) =>
+      "medicine" in x ? { id: x.medicine.id } : { id: x.id }
+    );
+
+  const fromIdRefsToConstantRefs = (ids: IdRef[]): ConstantRef[] =>
+    ids.map(({ id }) => ({ id, name: "" }));
 
   return (
     <Card
@@ -84,8 +94,10 @@ function HistoryCard({
               placeholder="Add Medication"
               type="medicine"
               title="Medication"
-              value={form.values.medicines ?? []}
-              onChange={(next) => form.setFieldValue("medicines", next)}
+              value={toIdRefs(form.values.medicines)}
+              onChange={(next: IdRef[]) =>
+                form.setFieldValue("medicines", fromIdRefsToConstantRefs(next))
+              }
             />
           </div>
           <div className="md:w-[20%] min-w-[160px] w-[100%] mt-4 m-auto">
@@ -94,7 +106,9 @@ function HistoryCard({
               type="disease"
               title="Condition"
               value={form.values.diseases ?? []}
-              onChange={(next) => form.setFieldValue("diseases", next)}
+              onChange={(next: IdRef[]) =>
+                form.setFieldValue("diseases", fromIdRefsToConstantRefs(next))
+              }
             />
           </div>
         </div>

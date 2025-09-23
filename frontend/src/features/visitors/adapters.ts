@@ -10,8 +10,8 @@ type CreateVisitorRequest = {
     weight: number;
     height: number;
     smoker: "smoker" | "non_smoker" | "ex_smoker";
-    years_smoking: number;
-    cig_per_day: number;
+    years_smoking: number | null;
+    cig_per_day: number | null;
     email: string | null;
     phone_number: string | null;
     history: string | null;
@@ -29,7 +29,7 @@ const toApiDate = (d: unknown): string => {
   const parsed = new Date(d as string);
   return isNaN(parsed.getTime()) ? "" : parsed.toISOString().slice(0, 10);
 };
-const toNum = (v: string | number | null | undefined) => (v ? Number(v) : 0);
+const toNum = (v: string | number | null | undefined) => (v ? Number(v) : null);
 
 const toSmoker = (s: string): "smoker" | "non_smoker" | "ex_smoker" =>
   s === "smoker" ? "smoker" : s === "non_smoker" ? "non_smoker" : "ex_smoker";
@@ -47,8 +47,8 @@ export function buildCreateVisitorPayload(
       birth_date: toApiDate(v.birth_date),
       gender: toGender(v.gender),
       amka: nullIfEmpty(v.amka),
-      weight: toNum(v.weight as any),
-      height: toNum(v.height as any),
+      weight: Number(v.weight),
+      height: Number(v.height),
       smoker: toSmoker(v.smoker as any),
       years_smoking: toNum(v.years_smoking as any),
       cig_per_day: toNum(v.cig_per_day as any),
@@ -56,10 +56,13 @@ export function buildCreateVisitorPayload(
       phone_number: nullIfEmpty(v.phoneNumber),
       history: nullIfEmpty(v.history),
     },
-    medicines: (v.medicines ?? []).map(({ id }) => ({
-      id: Number(id),
-      until: null,
-    })),
+    medicines: (v.medicines ?? []).map((m) => {
+      if ("medicine" in m) {
+        return { id: Number(m.medicine.id), until: m.until ?? null };
+      } else {
+        return { id: Number(m.id), until: null };
+      }
+    }),
     diseases: (v.diseases ?? []).map(({ id }) => ({ id: Number(id) })),
   };
 }

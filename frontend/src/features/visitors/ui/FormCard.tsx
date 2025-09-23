@@ -8,7 +8,10 @@ type Props = {
   type: "create" | "update";
 };
 
+
+
 function FormCard({ nextStep, form, type }: Props) {
+
   return (
     <Card
       className="w-[100%] md:w-[75%] mt-[5vh] m-auto"
@@ -22,7 +25,7 @@ function FormCard({ nextStep, form, type }: Props) {
           <Text size="xl" fw={500}>
             {type === "create"
               ? "Add New Visitor"
-              : `Update Visitor's Data : ${form.values.name} ${form.values.surname}`}
+              : `Update Visitor's Data`}
           </Text>
         </div>
       </Card.Section>

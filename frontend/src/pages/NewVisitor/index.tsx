@@ -48,6 +48,7 @@ const NewVisitor = () => {
         handleSubmit={handleSubmit}
         isLoading={isLoading}
         error={error}
+        mode="create"
       />
       <BlockingOverlay visible={overlay} label="Creating visitor..." />
     </div>

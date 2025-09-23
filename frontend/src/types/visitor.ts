@@ -15,7 +15,7 @@ export type VisitorInput = {
   phoneNumber: string;
   history: string;
   medicines: MedicineLink[] | ConstantRef[];
-  diseases: any[];
+  diseases: ConstantRef[];
 };
 
 export type Visitor = {

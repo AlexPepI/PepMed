@@ -13,6 +13,7 @@ type Props = {
   handleSubmit: (payload: VisitorInput) => Promise<any>;
   isLoading: boolean;
   error: unknown;
+  mode:"create" | "update";
 };
 
 export const StepperVisitor = ({
@@ -24,6 +25,7 @@ export const StepperVisitor = ({
   handleSubmit,
   isLoading,
   error,
+  mode
 }: Props) => {
 
   return (
@@ -33,17 +35,17 @@ export const StepperVisitor = ({
       className="w-[80%]"
       allowNextStepsSelect={false}
     >
-      <Stepper.Step label="Visitors Data" description="Add Data">
-        <FormCard form={form} nextStep={nextStep} type="create" />
+      <Stepper.Step label="Personal Information" description={mode==="create"?"Add Data":"Update Data"}>
+        <FormCard form={form} nextStep={nextStep} type={mode} />
       </Stepper.Step>
-      <Stepper.Step label="Medical History" description="Add Medical History">
+      <Stepper.Step label="Medical History" description={mode==="create"?"Add Medical History":"Update Medical History"}>
         <HistoryCard
           form={form}
           onBack={prevStep}
           onSubmit={handleSubmit}
           submitting={isLoading}
           error={error}
-          mode="create"
+          mode={mode}
         />
       </Stepper.Step>
     </Stepper>

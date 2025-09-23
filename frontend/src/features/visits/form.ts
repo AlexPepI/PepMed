@@ -16,10 +16,10 @@ export function buildNewVisitForm(initial: Partial<VisitInput> = {}) {
     mode: "controlled",
     initialValues: { ...newVisitInitialValues, ...initial },
     validate: {
-      diagnosis: isNotEmpty("Πρέπει να συμπληρωθεί!"),
-      comments: isNotEmpty("Πρέπει να συμπληρωθεί!"),
-      reason: isNotEmpty("Πρέπει να συμπληρωθεί!"),
-      examination: isNotEmpty("Πρέπει να συμπληρωθεί!"),
+      diagnosis: isNotEmpty("Please, fill out this field!"),
+      comments: isNotEmpty("Please, fill out this field!"),
+      reason: isNotEmpty("Please, fill out this field!"),
+      examination: isNotEmpty("Please, fill out this field!"),
     },
   });
 }
