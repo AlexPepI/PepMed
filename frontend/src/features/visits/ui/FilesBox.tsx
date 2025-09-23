@@ -46,7 +46,7 @@ export default function FilesBox({ files, setFiles }: Props) {
       multiple
       className="w-[80%] md:w-[75%] md:min-w-[400px]"
       onDrop={add}
-      accept={["image/*", "application/pdf"]}
+      accept={[ "application/pdf"]}
     >
       {files.length === 0 ? (
         <Group justify="center" mih={120} style={{ pointerEvents: "none" }}>
@@ -69,18 +69,10 @@ export default function FilesBox({ files, setFiles }: Props) {
                 alignItems: "center",
                 justifyContent: "center",
               }}
-            >
-              {f.file.type.startsWith("image/") ? (
-                <img
-                  src={f.url}
-                  alt={f.file.name}
-                  style={{ maxWidth: "100%", maxHeight: "100%" }}
-                />
-              ) : (
-                <Text ta="center" fz="xs" px="xs">
-                  {f.file.name}
-                </Text>
-              )}
+            >     
+              <Text ta="center" fz="xs" px="xs">
+                {f.file.name}
+              </Text>
               <ActionIcon
                 variant="filled"
                 color="red"

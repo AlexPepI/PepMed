@@ -71,6 +71,7 @@ const FileViewer = ({ visit }: Props) => {
         onDelete={handleDelete}
         disablePrev={!hasPrev}
         disableNext={!hasNext}
+        visitId={visit.id}
         showDelete
       />
     </>

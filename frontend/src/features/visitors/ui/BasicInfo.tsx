@@ -35,10 +35,10 @@ const BasicInfoRows = ({
     if (!res || !res.count || !res.unit) return "—";
     return `${res.count} ${
       res.unit === "years"
-        ? "Χρονών"
+        ? "years old"
         : res.unit === "months"
-        ? "Μηνών"
-        : "Ημερών"
+        ? "months old"
+        : "days old"
     }`;
   };
 
@@ -47,17 +47,17 @@ const BasicInfoRows = ({
       <div className="flex gap-4 justify-between flex-wrap">
         <div className="w-[40%] min-w-max">
           <Text>
-            <strong>Ηλικία :</strong> {ageText()}
+            <strong>Age :</strong> {ageText()}
           </Text>
         </div>
         <div className="w-[40%] min-w-max">
           <Text>
-            <strong>Φύλο:</strong>{" "}
+            <strong>Gender:</strong>{" "}
             {gender === "male"
-              ? "Άνδρας"
+              ? "Male"
               : gender === "female"
-              ? "Γυναίκα"
-              : "Άλλο"}
+              ? "Female"
+              : "Other"}
           </Text>
         </div>
       </div>
@@ -65,17 +65,17 @@ const BasicInfoRows = ({
       <div className="flex gap-4 justify-between flex-wrap">
         <div className="w-[40%] min-w-max">
           <Text>
-            <strong>Καπνιστής:</strong>{" "}
+            <strong>Smoker:</strong>{" "}
             {smoker === "smoker"
-              ? "Yes"
+              ? "Smoker"
               : smoker === "non_smoker"
-              ? "No"
-              : "Ex Smoker"}
+              ? "Non smoker"
+              : "Ex smoker"}
           </Text>
         </div>
         <div className="w-[40%] min-w-max">
           <Text>
-            <strong>Βάρος:</strong> {weight} kg
+            <strong>Weight:</strong> {weight} kg
           </Text>
         </div>
       </div>
@@ -83,7 +83,7 @@ const BasicInfoRows = ({
       <div className="flex gap-4 justify-between flex-wrap">
         <div className="w-[40%] min-w-max">
           <Text>
-            <strong>Ύψος:</strong> {height} cm
+            <strong>Height:</strong> {height} cm
           </Text>
         </div>
         <div className="w-[40%] min-w-max">
@@ -97,14 +97,14 @@ const BasicInfoRows = ({
         {!!years_smoking && (
           <div className="w-[40%] min-w-max">
             <Text>
-              <strong>Χρόνια Καπνίσματος :</strong> {years_smoking}
+              <strong>Years smoking :</strong> {years_smoking}
             </Text>
           </div>
         )}
         {!!cig_per_day && (
           <div className="w-[40%] min-w-max">
             <Text>
-              <strong>Τσιγάρα/μέρα :</strong> {cig_per_day}
+              <strong>Cigarretes per day :</strong> {cig_per_day}
             </Text>
           </div>
         )}

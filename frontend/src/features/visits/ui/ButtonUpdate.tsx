@@ -23,7 +23,7 @@ export default function UpdateVisitButton({ visit, visitor }: Props) {
         })
       }
     >
-      Επεξεργασία Επίσκεψης
+      Update
     </Button>
   );
 }

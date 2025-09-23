@@ -13,7 +13,7 @@ const VisitorCardDetails = ({ user }: Props) => {
 
   return (
     <Card
-      className="w-[100%] md:w-[76%] min-w-[290px] m-auto flex flex-col gap-4"
+      className="w-[100%] md:w-[76%] min-w-[290px] m-auto flex flex-col gap-4 min-h-[328px]"
       shadow="sm"
       padding="lg"
       radius="md"
@@ -30,12 +30,11 @@ const VisitorCardDetails = ({ user }: Props) => {
       />
       {user.history && <HistorySection history={user.history} />}
       <ListsSection medicines={user.medicines_links} diseases={user.diseases} />
-
       <Button
         className="self-end"
         onClick={() => navigate(`/visitor-update/${user.id}`, { state: user })}
       >
-        Επεξεργασία
+        Update
       </Button>
     </Card>
   );

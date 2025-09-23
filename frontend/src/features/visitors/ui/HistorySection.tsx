@@ -9,7 +9,7 @@ const HistorySection = ({ history }: Props) => {
     <Paper radius="md" p="md" withBorder shadow="md" bg="dark.7">
       <div>
         <Text className="flex justify-center">
-          <strong>Ιστορικό</strong>
+          <strong>Notes</strong>
         </Text>
         <Divider />
         <Text className="flex flex-wrap whitespace-pre-line">{history}</Text>

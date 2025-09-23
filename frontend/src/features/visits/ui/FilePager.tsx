@@ -1,5 +1,6 @@
 import { Button, Group, Text } from "@mantine/core";
 import { IconArrowNarrowRight, IconArrowNarrowLeft } from "@tabler/icons-react";
+import FileUploadModal from "./FileUploadModal";
 
 type Props = {
   index: number;
@@ -10,6 +11,7 @@ type Props = {
   disablePrev?: boolean;
   disableNext?: boolean;
   showDelete?: boolean;
+  visitId:number;
 };
 
 const FilePager = ({
@@ -21,6 +23,7 @@ const FilePager = ({
   disablePrev,
   disableNext,
   showDelete = true,
+  visitId
 }: Props) => (
   <Group justify="space-between" mt="md" wrap="wrap">
     <div>
@@ -39,6 +42,9 @@ const FilePager = ({
       <Text ml="md" span>
         {total ? index + 1 : 0} / {total}
       </Text>
+    </div>
+    <div className="flex justify-end mb-3">
+      <FileUploadModal visitId={visitId} />
     </div>
     {showDelete && onDelete && (
       <div className="flex gap-2">

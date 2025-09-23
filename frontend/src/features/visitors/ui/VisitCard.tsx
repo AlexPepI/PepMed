@@ -9,29 +9,29 @@ type Visit = {
 
 type Props = {
   visits: Visit[];
-  maxHeight: number;
+  height: number
   user: {
     name: string | null;
     surname: string | null;
     amka: string | null;
+
   };
 };
 
-const VisitorVisitsCard = ({ visits, maxHeight, user }: Props) => {
+const VisitorVisitsCard = ({ visits,height, user }: Props) => {
   return (
     <Card
-      className="flex flex-col w-[100%] h-[90%] md:w-[97%] m-auto"
-      style={{ height: `${maxHeight}px` }}
+      className="flex flex-col w-[100%] md:w-[97%]  "
       shadow="sm"
       padding="lg"
       radius="md"
       withBorder
     >
-      <div className="flex justify-center">
+      <div className="flex justify-center ">
         <ScrollArea.Autosize
           className="flex-1"
-          h={maxHeight}
-          type="scroll"
+          h={height<328?`328px`:`${height-90}`}
+          type="always"
           offsetScrollbars
         >
           <div className="grid gap-4 w-[90%] items-stretch grid-cols-[repeat(auto-fill,minmax(200px,1fr))]">

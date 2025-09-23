@@ -1,50 +1,63 @@
-import { useState } from "react";
-import { Button, Modal, FileInput, Group } from "@mantine/core";
+import { useEffect, useMemo, useState } from "react";
+import { Button, Modal, Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import { uploadFiles } from "../../../features/visits/uploadFiles";
 import { visit as visitKey } from "../../../features/visits/queryKeys";
 
+import FilesBox, { type Queued } from "../ui/FilesBox";
+
 type Props = { visitId: number };
 
 const FileUploadModal = ({ visitId }: Props) => {
   const [opened, { open, close }] = useDisclosure(false);
-  const [files, setFiles] = useState<File[] | null>(null);
+  const [queued, setQueued] = useState<Queued[]>([]);
   const [submitting, setSubmitting] = useState(false);
   const qc = useQueryClient();
+  const filesToUpload = useMemo(() => queued.map((q) => q.file), [queued]);
 
   const handleUpload = async () => {
-    if (!files?.length) return;
+    if (!filesToUpload.length) return;
     setSubmitting(true);
     try {
-      await uploadFiles(visitId, files);
+      await uploadFiles(visitId, filesToUpload);
       await qc.invalidateQueries({ queryKey: visitKey(visitId) });
-      setFiles(null);
+      for (const q of queued) URL.revokeObjectURL(q.url);
+      setQueued([]);
       close();
     } finally {
       setSubmitting(false);
     }
   };
 
+  useEffect(() => {
+    return () => {
+      for (const q of queued) URL.revokeObjectURL(q.url);
+    };
+  }, [queued]);
+
+  const handleBack = () => close();
+
   return (
     <>
       <Button radius="xl" onClick={open}>
-        Προσθήκη αρχείων
+        Add Files
       </Button>
-      <Modal opened={opened} onClose={close} title="Ανέβασμα PDF" centered>
-        <FileInput
-          multiple
-          accept="application/pdf"
-          placeholder="Επίλεξε PDF"
-          value={files as any}
-          onChange={(v) => setFiles(v as File[] | null)}
-        />
+
+      <Modal opened={opened} onClose={close} title="Upload PDF" centered>
+        <Group justify="center" mb="md">
+          <FilesBox files={queued} setFiles={setQueued} />
+        </Group>
         <Group justify="flex-end" mt="md">
-          <Button variant="default" onClick={close}>
-            Άκυρο
+          <Button variant="default" onClick={handleBack}>
+            Back
           </Button>
-          <Button loading={submitting} onClick={handleUpload}>
-            Ανέβασμα
+          <Button
+            loading={submitting}
+            onClick={handleUpload}
+            disabled={!filesToUpload.length || submitting}
+          >
+            Add
           </Button>
         </Group>
       </Modal>

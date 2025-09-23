@@ -16,7 +16,7 @@ const ListsSection = ({ medicines, diseases }: Props) => {
     <div className="flex gap-4 justify-between flex-wrap">
       {!!medicines?.length && (
         <div className="w-[40%] min-w-max ">
-          <strong>Φάρμακα</strong>
+          <strong>Medication</strong>
           <Divider className="mb-2" />
           <List spacing="xs" size="sm" center>
             {medicines.map((item) => (
@@ -29,7 +29,7 @@ const ListsSection = ({ medicines, diseases }: Props) => {
       )}
       {!!diseases?.length && (
         <div className="w-[40%] min-w-max ">
-          <strong>Χρόνιες Παθήσεις</strong>
+          <strong>Conditions</strong>
           <Divider className="mb-2" />
           <List spacing="xs" size="sm" center>
             {diseases.map((item) => (

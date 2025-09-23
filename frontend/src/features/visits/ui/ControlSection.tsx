@@ -7,7 +7,7 @@ const ControlSection = ({ control }: Props) => {
   return (
     <div className="flex justify-center">
       <Paper
-        className="w-[100%] md:w-[70%]"
+        className="w-[100%]"
         radius="md"
         p="md"
         withBorder
@@ -15,7 +15,7 @@ const ControlSection = ({ control }: Props) => {
         bg="dark.7"
       >
         <div className="flex justify-center">
-          <Title order={4}>Εργαστηριακός Έλεγχος</Title>
+          <Title order={4}>Lab Workup</Title>
         </div>
         <Divider />
         <div className="whitespace-pre-line">{control}</div>

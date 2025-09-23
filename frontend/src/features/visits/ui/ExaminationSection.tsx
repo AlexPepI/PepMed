@@ -5,7 +5,7 @@ type Props = { examination: string };
 const ExaminationSection = ({ examination }: Props) => (
   <div className="flex justify-center">
     <Paper
-      className="w-[100%] md:w-[70%]"
+      className="w-[100%]"
       radius="md"
       p="md"
       withBorder
@@ -13,7 +13,7 @@ const ExaminationSection = ({ examination }: Props) => (
       bg="dark.7"
     >
       <div className="flex justify-center">
-        <Title order={4}>Κλινική Εξέταση</Title>
+        <Title order={4}>Clinical Examination</Title>
       </div>
       <Divider />
       <div className="whitespace-pre-line">{examination || "—"}</div>
