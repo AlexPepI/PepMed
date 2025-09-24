@@ -72,7 +72,7 @@ def build_visit_payload(session, visit_id: int) -> dict:
             "packyears": _packyears(v.cig_per_day, v.years_smoking) or "-",
             "diseases_list": ", ".join(diseases) or "-",
             "medicines_list": ", ".join(visitor_meds) or "-",
-            "history_notes": v.history,
+            "history_notes": v.history if v.history else "-",
         },
         "visit": {
             "date_time": visit.created_at.isoformat(timespec="minutes") if visit.created_at else "-",

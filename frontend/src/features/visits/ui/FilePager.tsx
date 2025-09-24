@@ -49,7 +49,7 @@ const FilePager = ({
     {showDelete && onDelete && (
       <div className="flex gap-2">
         <Button color="red" radius="xl" onClick={onDelete}>
-          Διαγραφή
+          Delete
         </Button>
       </div>
     )}

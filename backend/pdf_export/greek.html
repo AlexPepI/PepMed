@@ -24,8 +24,9 @@
       .page {
         display: flex;
         flex-direction: column;
+        min-height: 26.5cm;
+        max-height: 27cm;
       }
-
       .header {
         border-bottom: 1px solid #3f82f8;
         background: #f5f5f5;
@@ -48,7 +49,6 @@
         font-size: x-small;
         text-align: right;
       }
-
       .content {
         flex: 1;
         padding: 20px;
@@ -200,7 +200,8 @@
             </tr>
           </tbody>
         </table>
-
+      </div>
+      <div style="margin-top: auto; padding-left: 20px; padding-right: 20px;" >
         <div class="section-title">Στοιχεία Ιατρού</div>
         <table class="patient-info-table">
           <tbody>
@@ -212,7 +213,6 @@
           </tbody>
         </table>
       </div>
-
       <div class="footer">
         <div>{{clinic.name}} • {{clinic.phone}} • {{clinic.email}}</div>
       </div>

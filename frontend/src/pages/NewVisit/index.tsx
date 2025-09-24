@@ -45,7 +45,7 @@ export default function NewVisitPage() {
         files.forEach((f) => URL.revokeObjectURL(f.url));
         setFiles([]);
       }
-      navigate("/");
+      navigate(`/visit-details/${visitId}`);
     } catch {
       setOverlay(false);
     }
