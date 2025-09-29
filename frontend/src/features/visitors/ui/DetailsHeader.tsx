@@ -5,11 +5,10 @@ import { useMediaQuery } from "@mantine/hooks";
 type Props = {
   name:string | null;
   surname:string | null;
-  amka:string | null;
+  amka:string | null | undefined;
 }
 
 const DetailsHeader = ({name,surname,amka}:Props) => {
-  console.log(amka)
 
   const smallerThanMd = useMediaQuery("(max-width: 768px)");
 
@@ -32,7 +31,7 @@ const DetailsHeader = ({name,surname,amka}:Props) => {
                 marginRight: smallerThanMd ? "" : "2rem",
               }}
             >
-              {amka!==null && <>Personal Number : {amka}</>}
+              {amka!==null && amka!==undefined && <>Personal Number : {amka}</>}
             </Title>
           </div>
         </div>

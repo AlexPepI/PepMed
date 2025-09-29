@@ -16,8 +16,6 @@ const VisitorUpdate = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  console.log(location.state)
-
   const newState = {
     ...location.state,
     medicines: (location.state.medicines_links as MedicineLink[]).map(
